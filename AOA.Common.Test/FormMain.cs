@@ -11,6 +11,7 @@ using AOA.Common.Utility.Compress;
 using AOA.Common.Utility.CustomConfig;
 using AOA.Common.Utility.Net;
 using AOA.Common.Utility.Crypto;
+using Microsoft.Extensions.Configuration;
 
 namespace AOA.Common.Test
 {
@@ -407,6 +408,13 @@ namespace AOA.Common.Test
                     txtConnStrs.AppendText(String.Format("Name = {0}, Conn = {1}, Read = {2}, Write = {3}{4}", element.ConnName, element.ConnString, element.ReadString, element.WriteString, Environment.NewLine));
                     txtConnStrs.AppendText(ConfigReader.GetDefaultConnectionString(element.ConnName) + Environment.NewLine);
                 }
+            }
+            var configroot = AppSettingsHelper.Get();
+            if (configroot != null)
+            {
+                txtConnStrs.AppendText(configroot.GetSection("TestConfig:SubTestConfig:Item1").Value);
+                txtConnStrs.AppendText(configroot.GetSection("TestConfig:SubTestConfig").GetValue<string>("Item2"));
+                txtConnStrs.AppendText(configroot.GetSection("TestConfig:SubTestConfig").GetValue<string>("Item3", "Item3Value"));
             }
         }
 
