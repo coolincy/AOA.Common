@@ -1,7 +1,8 @@
-﻿using System;
-using System.Text;
+﻿using AOA.Common.Utility.ClassExtensions;
+using System;
 using System.IO;
-using AOA.Common.Utility.ClassExtensions;
+using System.Reflection;
+using System.Text;
 
 namespace AOA.Common.Utility.IO
 {
@@ -10,6 +11,67 @@ namespace AOA.Common.Utility.IO
     /// </summary>
     public static class FileUtility
     {
+
+        #region GetFullFileName 获取指定存在的文件，如果不存在返回空
+        /// <summary>
+        /// 获取指定存在的文件，如果不存在返回空，按照以下顺序获取：
+        /// 1. 当前路径\filename;
+        /// 2. 当前路径\Configs\fileName;
+        /// 3. 当前路径\xxx.exe.fileName;
+        /// 4. 当前路径\AOA.Common.Utility.dll.fileName;
+        /// </summary>
+        /// <param name="fileName">需要获取的文件名，一般是配置文件</param>
+        /// <returns></returns>
+        public static string GetFullFileName(string fileName)
+        {
+            string tmpFileName = fileName;
+
+            if (!string.IsNullOrEmpty(tmpFileName))
+                if (!File.Exists(tmpFileName))
+                    tmpFileName = string.Empty;
+
+            if (string.IsNullOrEmpty(tmpFileName))
+            {
+                // fileName
+                tmpFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                if (!File.Exists(tmpFileName))
+                    tmpFileName = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(tmpFileName))
+            {
+                // Configs\fileName
+                tmpFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Configs\\{fileName}");
+                if (!File.Exists(tmpFileName))
+                    tmpFileName = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(tmpFileName))
+            {
+                // xxx.exe.fileName
+                tmpFileName = Assembly.GetEntryAssembly().Location; // AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
+                if (tmpFileName != null)
+                {
+                    tmpFileName = Path.ChangeExtension(tmpFileName, $".{fileName}");
+                    if (!File.Exists(tmpFileName))
+                        tmpFileName = string.Empty;
+                }
+            }
+
+            if (string.IsNullOrEmpty(tmpFileName))
+            {
+                // AOA.Common.Utility.dll.fileName
+                Assembly currentAssembly = typeof(FileUtility).Assembly;
+                if (!currentAssembly.GlobalAssemblyCache)
+                {
+                    tmpFileName = currentAssembly.Location + $".{fileName}";
+                    if (!File.Exists(tmpFileName))
+                        tmpFileName = string.Empty;
+                }
+            }
+            return tmpFileName;
+        } 
+        #endregion
 
         #region LoadFileToByteArray 读取文件到字节数组
         /// <summary>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,9 +7,7 @@
         <Description>AOA.Common.Utility 通用工具类</Description>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.1</Version>
-        <AssemblyVersion>1.0.1</AssemblyVersion>
-        <FileVersion>1.0.1</FileVersion>
+        <Version>1.0.2</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
     </PropertyGroup>
 

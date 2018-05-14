@@ -21,6 +21,7 @@ namespace AOA.Common.Test
         {
             InitializeComponent();
             cbCacheCatalog.Items.Clear();
+            var result = AOA.Common.Utility.IO.FileUtility.GetFullFileName("ss.txt");
             //if (CommonCache.Instance != null)
             //{
             //    foreach (KeyValuePair<string, CacheCatalog> catalogPair in CacheConfigFileManager.CurrentCacheConfiguration.CacheCatalogList)
