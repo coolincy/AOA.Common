@@ -66,6 +66,11 @@ namespace AOA.Common.Test
             txt15.Text = txt11.Text.HashDefaultToSHA1Hex();
         }
 
+        private void btnHex2MD5_Click(object sender, EventArgs e)
+        {
+            txt16.Text = txt11.Text.HexStringToByteArray().HashToMD5Hex();
+        }
+
         private void btnZip_Click(object sender, EventArgs e)
         {
             if (rbGZip.Checked)
@@ -271,7 +276,7 @@ namespace AOA.Common.Test
         {
             string publicKey;
             string privateKey;
-            Cryptography.GenRSAKeyPair(out publicKey, out privateKey);
+            Cryptography.GenRSAKeyPair(out publicKey, out privateKey, 384);
             txt72.Text = publicKey;
             txt73.Text = privateKey;
         }

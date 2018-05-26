@@ -177,6 +177,8 @@
             this.btnDoubleToChnMoney = new System.Windows.Forms.Button();
             this.txt1201 = new System.Windows.Forms.TextBox();
             this.btnTestLog = new System.Windows.Forms.Button();
+            this.txt16 = new System.Windows.Forms.TextBox();
+            this.btnHex2MD5 = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tpHash.SuspendLayout();
             this.tpRSA.SuspendLayout();
@@ -219,6 +221,8 @@
             // 
             // tpHash
             // 
+            this.tpHash.Controls.Add(this.txt16);
+            this.tpHash.Controls.Add(this.btnHex2MD5);
             this.tpHash.Controls.Add(this.txt15);
             this.tpHash.Controls.Add(this.btnSHA1Default);
             this.tpHash.Controls.Add(this.txt14);
@@ -1827,6 +1831,25 @@
             this.btnTestLog.UseVisualStyleBackColor = true;
             this.btnTestLog.Click += new System.EventHandler(this.btnTestLog_Click);
             // 
+            // txt16
+            // 
+            this.txt16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt16.Location = new System.Drawing.Point(87, 240);
+            this.txt16.Name = "txt16";
+            this.txt16.Size = new System.Drawing.Size(811, 21);
+            this.txt16.TabIndex = 11;
+            // 
+            // btnHex2MD5
+            // 
+            this.btnHex2MD5.Location = new System.Drawing.Point(6, 240);
+            this.btnHex2MD5.Name = "btnHex2MD5";
+            this.btnHex2MD5.Size = new System.Drawing.Size(75, 23);
+            this.btnHex2MD5.TabIndex = 10;
+            this.btnHex2MD5.Text = "Hex MD5";
+            this.btnHex2MD5.UseVisualStyleBackColor = true;
+            this.btnHex2MD5.Click += new System.EventHandler(this.btnHex2MD5_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2018,6 +2041,8 @@
         private System.Windows.Forms.TextBox txtGetLength;
         private System.Windows.Forms.TextBox tbCatelogInfo;
         private System.Windows.Forms.Button btnReadWriteText;
+        private System.Windows.Forms.TextBox txt16;
+        private System.Windows.Forms.Button btnHex2MD5;
     }
 }
 

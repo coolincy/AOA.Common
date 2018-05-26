@@ -21,9 +21,9 @@ namespace AOA.Common.Utility.Crypto
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="privateKey"></param>
-        public static void GenRSAKeyPair(out string publicKey, out string privateKey)
+        public static void GenRSAKeyPair(out string publicKey, out string privateKey, int dwKeySize = 512)
         {
-            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(512))
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(dwKeySize))
             {
                 RSAParameters rsaParams = rsa.ExportParameters(true);
                 // 公钥	
@@ -51,7 +51,7 @@ namespace AOA.Common.Utility.Crypto
                     RSAParameters rsaParamsPub = new RSAParameters()
                     {
                         Modulus = StringEncode.HexStringToByteArray(hexPublicKey),
-                        Exponent = exponent,                        
+                        Exponent = exponent,
                     };
                     rsa.ImportParameters(rsaParamsPub);
                     return rsa.Encrypt(data, false);
