@@ -18,13 +18,13 @@ namespace AOA.Common.Utility.Net
     {
 
         private static int Http_Request_TimeOut = 10000; // 10秒超时
-        private static int Http_Read_TimeOut = 10000; // 10秒超时
+        //private static int Http_Read_TimeOut = 10000; // 10秒超时
         private readonly static string userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; AOA.Common.Utility)";
 
         static HttpPostManager()
         {
             Http_Request_TimeOut = ConfigReader.GetInt("HttpRequestTimeOut", 10000); // 10秒超时
-            Http_Read_TimeOut = ConfigReader.GetInt("HttpReadTimeOut", Http_Request_TimeOut); // 10秒超时
+            //Http_Read_TimeOut = ConfigReader.GetInt("HttpReadTimeOut", Http_Request_TimeOut); // 10秒超时
         }
 
         #region private CloseRequestResponse 关闭Http请求
@@ -63,17 +63,17 @@ namespace AOA.Common.Utility.Net
         /// <param name="responseTextEncoding">服务器返回的字符编码</param>
         /// <param name="responseContentType">服务器返回的Content-type 的值</param>
         /// <param name="httpRequestTimeOut">请求超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
+        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] HttpRequest(string url, string httpMethod, string requestContentType, byte[] postBytes,
             out HttpStatusCode responseStatusCode, out Encoding responseTextEncoding, out string responseContentType,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0,*/ long maxReadLen = 0)
         {
             if (httpRequestTimeOut <= 0)
                 httpRequestTimeOut = Http_Request_TimeOut;
-            if (httpReadTimeOut <= 0)
-                httpReadTimeOut = Http_Read_TimeOut;
+            //if (httpReadTimeOut <= 0)
+            //    httpReadTimeOut = Http_Read_TimeOut;
 
             DateTime startTime = DateTime.Now;
             responseTextEncoding = Encoding.UTF8;
@@ -168,7 +168,7 @@ namespace AOA.Common.Utility.Net
                                 streamForRead = new GZipStream(stream, CompressionMode.Decompress);
                             else
                                 streamForRead = stream;
-                            streamForRead.ReadTimeout = httpReadTimeOut;
+                            // streamForRead.ReadTimeout = httpReadTimeOut;
 
                             //接收数据
                             long responseDataLength = response.ContentLength;
@@ -267,17 +267,17 @@ namespace AOA.Common.Utility.Net
         /// <param name="responseStatusCode">Http服务器返回的状态码</param>
         /// <param name="responseTextEncoding">服务器返回的字符编码</param>
         /// <param name="httpRequestTimeOut">请求超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
+        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] HttpRequest(string url, string httpMethod, string requestContentType, byte[] postBytes,
             out HttpStatusCode responseStatusCode, out Encoding responseTextEncoding,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0,*/ long maxReadLen = 0)
         {
             string responseContentType;
             return HttpRequest(url, httpMethod, requestContentType, postBytes,
                 out responseStatusCode, out responseTextEncoding, out responseContentType,
-                httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+                httpRequestTimeOut, /*httpReadTimeOut,*/ maxReadLen);
         }
         #endregion
 
@@ -290,14 +290,14 @@ namespace AOA.Common.Utility.Net
         /// <param name="url">请求地址URL</param>
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
+        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字节数组</returns>
         public static byte[] GetByteData(string url, out HttpStatusCode statusCode,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0, */long maxReadLen = 0)
         {
             Encoding encoding;
-            return HttpRequest(url, "GET", "multipart/form-data", null, out statusCode, out encoding, httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+            return HttpRequest(url, "GET", "multipart/form-data", null, out statusCode, out encoding, httpRequestTimeOut, /*httpReadTimeOut, */maxReadLen);
         }
 
         /// <summary>
@@ -326,10 +326,10 @@ namespace AOA.Common.Utility.Net
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字符串</returns>
         public static string GetStringData(string url, out HttpStatusCode statusCode,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0, */long maxReadLen = 0)
         {
             Encoding encoding;
-            byte[] byteData = HttpRequest(url, "GET", "multipart/form-data", null, out statusCode, out encoding, httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+            byte[] byteData = HttpRequest(url, "GET", "multipart/form-data", null, out statusCode, out encoding, httpRequestTimeOut, /*httpReadTimeOut, */maxReadLen);
             if (byteData != null)
                 return encoding.GetString(byteData);
             else
@@ -360,13 +360,13 @@ namespace AOA.Common.Utility.Net
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="encoding">服务器返回的字符编码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
+        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] GetPostData(string url, byte[] postBytes, out HttpStatusCode statusCode, out Encoding encoding,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0, */long maxReadLen = 0)
         {
-            return HttpRequest(url, "POST", "multipart/form-data", postBytes, out statusCode, out encoding, httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+            return HttpRequest(url, "POST", "multipart/form-data", postBytes, out statusCode, out encoding, httpRequestTimeOut, /*httpReadTimeOut, */maxReadLen);
         }
 
         /// <summary>
@@ -398,10 +398,10 @@ namespace AOA.Common.Utility.Net
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的字符串</returns>
         public static string GetPostString(string url, string postStr, out HttpStatusCode statusCode,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0, */long maxReadLen = 0)
         {
             Encoding encoding;
-            byte[] byteData = HttpRequest(url, "POST", "multipart/form-data", Encoding.UTF8.GetBytes(postStr), out statusCode, out encoding, httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+            byte[] byteData = HttpRequest(url, "POST", "multipart/form-data", Encoding.UTF8.GetBytes(postStr), out statusCode, out encoding, httpRequestTimeOut, /*httpReadTimeOut, */maxReadLen);
             if (byteData != null)
                 return encoding.GetString(byteData);
             else
@@ -434,10 +434,10 @@ namespace AOA.Common.Utility.Net
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字符串</returns>
         public static string GetStringByFormPost(string url, string paramStr, out HttpStatusCode statusCode,
-            int httpRequestTimeOut = 0, int httpReadTimeOut = 0, long maxReadLen = 0)
+            int httpRequestTimeOut = 0, /*int httpReadTimeOut = 0, */long maxReadLen = 0)
         {
             Encoding encoding;
-            byte[] byteData = HttpRequest(url, "POST", "application/x-www-form-urlencoded", Encoding.UTF8.GetBytes(paramStr), out statusCode, out encoding, httpRequestTimeOut, httpReadTimeOut, maxReadLen);
+            byte[] byteData = HttpRequest(url, "POST", "application/x-www-form-urlencoded", Encoding.UTF8.GetBytes(paramStr), out statusCode, out encoding, httpRequestTimeOut, /*httpReadTimeOut, */maxReadLen);
             if (byteData != null)
                 return encoding.GetString(byteData);
             else

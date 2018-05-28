@@ -4,10 +4,11 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <Authors>AOA Studio</Authors>
         <Company>AOA Studio</Company>
-        <Description>AOA.Common.Utility 通用工具类</Description>
+        <Description>AOA.Common.Utility 通用工具类
+1.0.3 fix bug under .net core: Timeouts are not supported on this stream</Description>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
     </PropertyGroup>
 
