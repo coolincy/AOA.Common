@@ -125,11 +125,7 @@ namespace AOA.Common.Utility.IO
         {
             try
             {
-                byte[] fileData = LoadFileToByteArray(filePath);
-                if (fileData == null || fileData.Length == 0)
-                    return string.Empty;
-                else
-                    return Encoding.Default.GetString(fileData);
+                return File.ReadAllText(filePath, Encoding.Default);
             }
             catch (Exception ex)
             {
@@ -149,11 +145,7 @@ namespace AOA.Common.Utility.IO
         {
             try
             {
-                byte[] fileData = LoadFileToByteArray(filePath);
-                if (fileData == null || fileData.Length == 0)
-                    return string.Empty;
-                else
-                    return UTF8Encoding.UTF8.GetString(fileData);
+                return File.ReadAllText(filePath, Encoding.UTF8);
             }
             catch (Exception ex)
             {
