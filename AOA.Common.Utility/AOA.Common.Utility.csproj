@@ -5,12 +5,13 @@
         <Authors>AOA Studio</Authors>
         <Company>AOA Studio</Company>
         <Description>AOA.Common.Utility 通用工具类
+2.0.2 替换 ICSharpCode.SharpZipLib.Patched 0.86.5.1 为 SharpZipLib 1.0.0
 2.0.1 upgrade nuget packages
 2.0.0 upgrade for .net core 2.1.0
 1.0.3 fix bug under .net core: Timeouts are not supported on this stream</Description>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.0.1</Version>
+        <Version>2.0.2</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
     </PropertyGroup>
 
@@ -19,7 +20,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="0.86.5.1" />
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.2" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
@@ -28,6 +28,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
         <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
         <PackageReference Include="NLog" Version="4.5.10" />
+        <PackageReference Include="SharpZipLib" Version="1.0.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
         <PackageReference Include="System.ServiceModel.Http" Version="4.5.3" />
     </ItemGroup>
