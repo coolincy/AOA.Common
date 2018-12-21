@@ -47,7 +47,6 @@ namespace AOA.Common.Test.Properties {
         }
         
         /// <summary>
-        ///   使用此强类型资源类，为所有资源查找
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]

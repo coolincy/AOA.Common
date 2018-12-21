@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AOA.Common.Utility.ClassExtensions
 {
@@ -125,13 +124,14 @@ namespace AOA.Common.Utility.ClassExtensions
         /// </summary>
         /// <param name="sourceString">源字符串</param>
         /// <param name="regexStr">正则表达式字符串</param>
+        /// <param name="options">A bitwise combination of the enumeration values that modify the regular expression.</param>
         /// <returns></returns>
-        public static bool IsSomething(this string sourceString, string regexStr)
+        public static bool IsSomething(this string sourceString, string regexStr, RegexOptions options = RegexOptions.IgnoreCase)
         {
             if (sourceString == null || sourceString == string.Empty)
                 return false;
 
-            return new Regex(regexStr, RegexOptions.IgnoreCase).IsMatch(sourceString);
+            return new Regex(regexStr, options).IsMatch(sourceString);
         }
         #endregion
 
