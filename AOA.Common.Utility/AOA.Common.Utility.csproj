@@ -6,9 +6,10 @@
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.0.3</Version>
+        <Version>2.0.4</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.0.4 升级 NLog 4.6.2
 2.0.3 升级 SharpZipLib 1.1.0, NLog 4.6.0
 2.0.2 替换 ICSharpCode.SharpZipLib.Patched 0.86.5.1 为 SharpZipLib 1.0.0
 2.0.1 upgrade nuget packages
@@ -28,7 +29,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-        <PackageReference Include="NLog" Version="4.6.0" />
+        <PackageReference Include="NLog" Version="4.6.2" />
         <PackageReference Include="SharpZipLib" Version="1.1.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
         <PackageReference Include="System.ServiceModel.Http" Version="4.5.3" />
