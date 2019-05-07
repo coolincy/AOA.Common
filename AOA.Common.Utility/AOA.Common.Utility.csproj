@@ -6,7 +6,7 @@
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.0.4</Version>
+        <Version>2.0.5</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
 2.0.5 添加 CRC16 算法，升级 NLog 4.6.3
