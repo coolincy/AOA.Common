@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tpHash = new System.Windows.Forms.TabPage();
+            this.txt16 = new System.Windows.Forms.TextBox();
+            this.btnHex2MD5 = new System.Windows.Forms.Button();
             this.txt15 = new System.Windows.Forms.TextBox();
             this.btnSHA1Default = new System.Windows.Forms.Button();
             this.txt14 = new System.Windows.Forms.TextBox();
@@ -177,8 +179,8 @@
             this.btnDoubleToChnMoney = new System.Windows.Forms.Button();
             this.txt1201 = new System.Windows.Forms.TextBox();
             this.btnTestLog = new System.Windows.Forms.Button();
-            this.txt16 = new System.Windows.Forms.TextBox();
-            this.btnHex2MD5 = new System.Windows.Forms.Button();
+            this.btnHwId = new System.Windows.Forms.Button();
+            this.tbHwId = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tpHash.SuspendLayout();
             this.tpRSA.SuspendLayout();
@@ -240,6 +242,25 @@
             this.tpHash.TabIndex = 0;
             this.tpHash.Text = "哈希";
             this.tpHash.UseVisualStyleBackColor = true;
+            // 
+            // txt16
+            // 
+            this.txt16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt16.Location = new System.Drawing.Point(87, 240);
+            this.txt16.Name = "txt16";
+            this.txt16.Size = new System.Drawing.Size(811, 21);
+            this.txt16.TabIndex = 11;
+            // 
+            // btnHex2MD5
+            // 
+            this.btnHex2MD5.Location = new System.Drawing.Point(6, 240);
+            this.btnHex2MD5.Name = "btnHex2MD5";
+            this.btnHex2MD5.Size = new System.Drawing.Size(75, 23);
+            this.btnHex2MD5.TabIndex = 10;
+            this.btnHex2MD5.Text = "Hex MD5";
+            this.btnHex2MD5.UseVisualStyleBackColor = true;
+            this.btnHex2MD5.Click += new System.EventHandler(this.btnHex2MD5_Click);
             // 
             // txt15
             // 
@@ -1621,6 +1642,8 @@
             // 
             // tpGoogleAna
             // 
+            this.tpGoogleAna.Controls.Add(this.tbHwId);
+            this.tpGoogleAna.Controls.Add(this.btnHwId);
             this.tpGoogleAna.Controls.Add(this.button1);
             this.tpGoogleAna.Controls.Add(this.btnGATest);
             this.tpGoogleAna.Location = new System.Drawing.Point(4, 22);
@@ -1632,7 +1655,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(289, 133);
+            this.button1.Location = new System.Drawing.Point(99, 13);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -1831,24 +1854,22 @@
             this.btnTestLog.UseVisualStyleBackColor = true;
             this.btnTestLog.Click += new System.EventHandler(this.btnTestLog_Click);
             // 
-            // txt16
+            // btnHwId
             // 
-            this.txt16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt16.Location = new System.Drawing.Point(87, 240);
-            this.txt16.Name = "txt16";
-            this.txt16.Size = new System.Drawing.Size(811, 21);
-            this.txt16.TabIndex = 11;
+            this.btnHwId.Location = new System.Drawing.Point(18, 119);
+            this.btnHwId.Name = "btnHwId";
+            this.btnHwId.Size = new System.Drawing.Size(75, 23);
+            this.btnHwId.TabIndex = 2;
+            this.btnHwId.Text = "HardwareId";
+            this.btnHwId.UseVisualStyleBackColor = true;
+            this.btnHwId.Click += new System.EventHandler(this.BtnHwId_Click);
             // 
-            // btnHex2MD5
+            // tbHwId
             // 
-            this.btnHex2MD5.Location = new System.Drawing.Point(6, 240);
-            this.btnHex2MD5.Name = "btnHex2MD5";
-            this.btnHex2MD5.Size = new System.Drawing.Size(75, 23);
-            this.btnHex2MD5.TabIndex = 10;
-            this.btnHex2MD5.Text = "Hex MD5";
-            this.btnHex2MD5.UseVisualStyleBackColor = true;
-            this.btnHex2MD5.Click += new System.EventHandler(this.btnHex2MD5_Click);
+            this.tbHwId.Location = new System.Drawing.Point(99, 121);
+            this.tbHwId.Name = "tbHwId";
+            this.tbHwId.Size = new System.Drawing.Size(802, 21);
+            this.tbHwId.TabIndex = 3;
             // 
             // FormMain
             // 
@@ -1885,6 +1906,7 @@
             this.tpIP.ResumeLayout(false);
             this.tpIP.PerformLayout();
             this.tpGoogleAna.ResumeLayout(false);
+            this.tpGoogleAna.PerformLayout();
             this.tpOther.ResumeLayout(false);
             this.tpOther.PerformLayout();
             this.ResumeLayout(false);
@@ -2043,6 +2065,8 @@
         private System.Windows.Forms.Button btnReadWriteText;
         private System.Windows.Forms.TextBox txt16;
         private System.Windows.Forms.Button btnHex2MD5;
+        private System.Windows.Forms.TextBox tbHwId;
+        private System.Windows.Forms.Button btnHwId;
     }
 }
 

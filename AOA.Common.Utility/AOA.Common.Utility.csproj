@@ -6,9 +6,10 @@
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.0.5</Version>
+        <Version>2.0.6</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.0.6 添加 NetworkInterfaceHelper HardwareIdHelper
 2.0.5 添加 CRC16 算法，升级 NLog 4.6.3
 2.0.4 升级 NLog 4.6.2
 2.0.3 升级 SharpZipLib 1.1.0, NLog 4.6.0

@@ -573,6 +573,10 @@ namespace AOA.Common.Test
             MessageBox.Show(tt);
         }
 
+        private void BtnHwId_Click(object sender, EventArgs e)
+        {
+            tbHwId.Text = HardwareIdHelper.GetHardwareId();
+        }
     }
 
     [Serializable]
