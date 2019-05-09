@@ -12,6 +12,7 @@ using AOA.Common.Utility.CustomConfig;
 using AOA.Common.Utility.Net;
 using AOA.Common.Utility.Crypto;
 using Microsoft.Extensions.Configuration;
+using AOA.Common.Utility.Hardware;
 
 namespace AOA.Common.Test
 {
@@ -575,7 +576,7 @@ namespace AOA.Common.Test
 
         private void BtnHwId_Click(object sender, EventArgs e)
         {
-            tbHwId.Text = HardwareIdHelper.GetHardwareId();
+            tbHwId.Text = CPUInfoHelper.GetCPUId();
         }
     }
 

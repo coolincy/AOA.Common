@@ -1,11 +1,13 @@
 using System;
-using AOA.Common.Utility.Crypto;
+
+using AOA.Common.Utility.Hardware;
+
 using NUnit.Framework;
 
-namespace Tests
+namespace AOA.Common.Utility.NUnitTest
 {
 
-    public class Tests
+    public class HardwareIdHelperTest
     {
 
         [SetUp]

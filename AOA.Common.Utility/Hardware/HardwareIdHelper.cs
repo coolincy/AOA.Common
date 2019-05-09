@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-using AOA.Common.Utility.Net;
+using AOA.Common.Utility.Crypto;
 
-namespace AOA.Common.Utility.Crypto
+namespace AOA.Common.Utility.Hardware
 {
 
     /// <summary>

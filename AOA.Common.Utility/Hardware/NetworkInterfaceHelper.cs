@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using System.Text;
+
 using AOA.Common.Utility.ClassExtensions;
 
-namespace AOA.Common.Utility.Net
+namespace AOA.Common.Utility.Hardware
 {
 
     /// <summary>
