@@ -28,6 +28,20 @@ namespace AOA.Common.Utility.Hardware
                 tDesIV = default3DesIV;
         }
 
+        private static string GetOriginHwId()
+        {
+            var cpuId = CPUInfoHelper.GetCPUId();
+            var pCnt = Environment.ProcessorCount;
+            var pArch = RuntimeInformation.ProcessArchitecture;
+            var s = $"{cpuId}|{pCnt}|{pArch}";
+            var macList = NetworkInterfaceHelper.GetPhysicalAddresss();
+            foreach (var item in macList)
+            {
+                s = $"{s}|{item}";
+            }
+            return s;
+        }
+
         /// <summary>
         /// 获取系统硬件唯一Id(依据CPU、MAC地址等)(16进制字符串)
         /// </summary>
@@ -37,15 +51,7 @@ namespace AOA.Common.Utility.Hardware
         public static string GetHardwareId(byte[] tDesKey = null, byte[] tDesIV = null)
         {
             ConfirmKeyIV(ref tDesKey, ref tDesIV);
-            var pCnt = Environment.ProcessorCount;
-            var pArch = RuntimeInformation.ProcessArchitecture;
-            var s = $"{pCnt}|{pArch}";
-            var macList = NetworkInterfaceHelper.GetPhysicalAddresss();
-            foreach (var item in macList)
-            {
-                s = $"{s}|{item}";
-            }
-            return Cryptography.TripleDesEncryptToHex(tDesKey, tDesIV, s);
+            return Cryptography.TripleDesEncryptToHex(tDesKey, tDesIV, GetOriginHwId());
         }
 
         /// <summary>
@@ -71,15 +77,7 @@ namespace AOA.Common.Utility.Hardware
         public static string GetHardwareIdBase64(byte[] tDesKey = null, byte[] tDesIV = null)
         {
             ConfirmKeyIV(ref tDesKey, ref tDesIV);
-            var pCnt = Environment.ProcessorCount;
-            var pArch = RuntimeInformation.ProcessArchitecture;
-            var s = $"{pCnt}|{pArch}";
-            var macList = NetworkInterfaceHelper.GetPhysicalAddresss();
-            foreach (var item in macList)
-            {
-                s = $"{s}|{item}";
-            }
-            return Cryptography.TripleDesEncryptToBase64(tDesKey, tDesIV, s);
+            return Cryptography.TripleDesEncryptToBase64(tDesKey, tDesIV, GetOriginHwId());
         }
 
         /// <summary>
