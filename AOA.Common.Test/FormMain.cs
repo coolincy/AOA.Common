@@ -277,7 +277,8 @@ namespace AOA.Common.Test
         {
             string publicKey;
             string privateKey;
-            Cryptography.GenRSAKeyPair(out publicKey, out privateKey, 384);
+            // Cryptography.GenRSAKeyPair(out publicKey, out privateKey, 384);
+            RSAHelper.GenRSAKeyPair(out publicKey, out privateKey, 384);
             txt72.Text = publicKey;
             txt73.Text = privateKey;
         }
