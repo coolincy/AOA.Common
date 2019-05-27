@@ -6,9 +6,10 @@
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.0.8</Version>
+        <Version>2.0.9</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.0.9 完善RSAHelper替代仅支持Windows的CryptographyRsa
 2.0.8 HardwareIdHelper.GetHardwareId 加入 CPUId
 2.0.7 添加 CPUInfoHelper
 2.0.6 添加 NetworkInterfaceHelper HardwareIdHelper

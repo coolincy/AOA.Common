@@ -4,7 +4,7 @@ using AOA.Common.Utility.Hardware;
 
 using NUnit.Framework;
 
-namespace AOA.Common.Utility.NUnitTest
+namespace AOA.Common.Utility.NUnitTest.Hardware
 {
 
     public class CPUInfoHelperTest

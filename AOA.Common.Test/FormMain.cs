@@ -275,10 +275,8 @@ namespace AOA.Common.Test
 
         private void btnRsaKey_Click(object sender, EventArgs e)
         {
-            string publicKey;
-            string privateKey;
             // Cryptography.GenRSAKeyPair(out publicKey, out privateKey, 384);
-            RSAHelper.GenRSAKeyPair(out publicKey, out privateKey, 384);
+            (string publicKey, string privateKey) = RSAHelper.GenRSAKeyPair();
             txt72.Text = publicKey;
             txt73.Text = privateKey;
         }

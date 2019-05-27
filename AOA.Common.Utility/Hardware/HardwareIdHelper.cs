@@ -7,7 +7,7 @@ namespace AOA.Common.Utility.Hardware
 {
 
     /// <summary>
-    /// 硬件唯一Id帮助类
+    /// 硬件唯一Id帮助类，使用3DES加密相关内容
     /// </summary>
     public class HardwareIdHelper
     {
