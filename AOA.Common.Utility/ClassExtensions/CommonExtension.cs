@@ -50,7 +50,7 @@ namespace AOA.Common.Utility.ClassExtensions
             string s = money.ToString("#L#E#D#C#K#E#D#C#J#E#D#C#I#E#D#C#H#E#D#C#G#E#D#C#F#E#D#C#.0B0A");
             string d = Regex.Replace(s, @"((?<=-|^)[^1-9]*)|((?'z'0)[0A-E]*((?=[1-9])|(?'-z'(?=[F-L\.]|$))))|((?'b'[F-L])(?'z'0)[0A-L]*((?=[1-9])|(?'-z'(?=[\.]|$))))", "${b}${z}");
             return Regex.Replace(d, ".",
-                delegate(Match m)
+                delegate (Match m)
                 {
                     return "负元空零壹贰叁肆伍陆柒捌玖空空空空空空空分角拾佰仟萬億兆京垓秭穰"[m.Value[0] - '-'].ToString();
                 }
@@ -62,11 +62,13 @@ namespace AOA.Common.Utility.ClassExtensions
         /// </summary>
         /// <param name="obj">对象</param>
         /// <returns>Json格式的字符串</returns>
-        public static string ToJson(this object obj)
+        public static string ToJson(this object obj, Formatting formatting = Formatting.None)
         {
-            JsonSerializerSettings jss = new JsonSerializerSettings();
-            jss.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            return JsonConvert.SerializeObject(obj, Formatting.None, jss);
+            return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings
+            {
+                Formatting = formatting,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
         }
 
         /// <summary>

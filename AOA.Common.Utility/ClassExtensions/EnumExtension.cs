@@ -13,7 +13,7 @@ namespace AOA.Common.Utility.ClassExtensions
     {
 
         /// <summary>
-        /// 获取枚举描述
+        /// 获取枚举 EnumDescriptionAttribute 描述
         /// </summary>
         /// <param name="enumCode"></param>
         /// <returns></returns>
@@ -23,7 +23,7 @@ namespace AOA.Common.Utility.ClassExtensions
         }
 
         /// <summary>
-        /// 获取枚举描述
+        /// 获取枚举 EnumDescriptionAttribute 描述
         /// </summary>
         /// <param name="enumCode"></param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace AOA.Common.Utility.ClassExtensions
         }
 
         /// <summary>
-        /// 通过枚举值取枚举描述
+        /// 通过枚举值取枚举 EnumDescriptionAttribute 描述
         /// </summary>
         /// <param name="enumCode"></param>
         /// <param name="value"></param>

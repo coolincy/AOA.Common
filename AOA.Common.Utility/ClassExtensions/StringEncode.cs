@@ -69,7 +69,7 @@ namespace AOA.Common.Utility.ClassExtensions
         /// </summary>
         /// <param name="sourceArray">源字节数组</param>
         /// <returns>十六进制字符串</returns>
-        public static string ByteArrayToHexString(IEnumerable<byte> sourceArray)
+        public static string ByteArrayToHexString(this IEnumerable<byte> sourceArray)
         {
             StringBuilder sBuilder = new StringBuilder();
 
@@ -86,7 +86,7 @@ namespace AOA.Common.Utility.ClassExtensions
         /// </summary>
         /// <param name="sourceArray">源字节数组</param>
         /// <returns>十六进制字符串</returns>
-        public static string CharArrayToHexString(char[] sourceArray)
+        public static string CharArrayToHexString(this char[] sourceArray)
         {
             StringBuilder sBuilder = new StringBuilder();
 
