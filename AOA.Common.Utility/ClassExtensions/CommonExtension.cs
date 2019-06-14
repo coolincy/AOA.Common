@@ -62,11 +62,24 @@ namespace AOA.Common.Utility.ClassExtensions
         /// </summary>
         /// <param name="obj">对象</param>
         /// <returns>Json格式的字符串</returns>
-        public static string ToJson(this object obj, Formatting formatting = Formatting.None)
+        public static string ToJson(this object obj)
         {
             return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings
             {
-                Formatting = formatting,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
+        /// <summary>
+        /// 对象转换为Json字符串
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <param name="formatting">格式化输出</param>
+        /// <returns>Json格式的字符串</returns>
+        public static string ToJson(this object obj, Formatting formatting)
+        {
+            return JsonConvert.SerializeObject(obj, formatting, new JsonSerializerSettings
+            {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
         }
