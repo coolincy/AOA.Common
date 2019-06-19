@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.ServiceModel;
 
 using Newtonsoft.Json;
 
@@ -82,37 +80,6 @@ namespace AOA.Common.Utility.ClassExtensions
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
-        }
-
-        /// <summary>
-        /// 安全关闭WCF服务连接
-        /// </summary>
-        /// <param name="wcfServiceClient">WCF服务连接</param>
-        public static void CloseConnection(this ICommunicationObject wcfServiceClient)
-        {
-            if (wcfServiceClient.State != CommunicationState.Opened)
-                return;
-
-            try
-            {
-                wcfServiceClient.Close();
-            }
-            catch (CommunicationException ex)
-            {
-                wcfServiceClient.Abort();
-                throw ex;
-            }
-            catch (TimeoutException ex)
-            {
-                wcfServiceClient.Abort();
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                wcfServiceClient.Abort();
-                throw ex;
-            }
-
         }
 
     }

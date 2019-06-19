@@ -1,5 +1,4 @@
-﻿using System;
-using AOA.Common.Utility.Crypto;
+﻿using AOA.Common.Utility.Crypto;
 
 namespace AOA.Common.Utility.ClassExtensions
 {

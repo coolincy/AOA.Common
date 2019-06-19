@@ -1,8 +1,10 @@
 using System;
+
 using Microsoft.Extensions.Caching.Memory;
 
 namespace AOA.Common.Utility
 {
+
     /// <summary>
     /// Cache操作帮助类
     /// </summary>
@@ -124,4 +126,5 @@ namespace AOA.Common.Utility
         #endregion
 
     }
+
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text;
-
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 using AOA.Common.Utility.ClassExtensions;
 using AOA.Common.Utility.Compress;
@@ -10,7 +9,10 @@ using AOA.Common.Utility.Compress;
 namespace AOA.Common.Utility.Crypto
 {
 
-    public static partial class Cryptography
+    /// <summary>
+    /// Delphi 使用的 Des 算法
+    /// </summary>
+    public static class CryptographyDesForDelphi
     {
 
         // 默认Des密钥

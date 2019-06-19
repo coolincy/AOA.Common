@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Text;
 using System.IO;
+using System.Text;
+
+using AOA.Common.Utility.ClassExtensions;
 
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-
-using AOA.Common.Utility.ClassExtensions;
 
 namespace AOA.Common.Utility.Compress
 {

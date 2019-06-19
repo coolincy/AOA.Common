@@ -44,7 +44,7 @@ namespace AOA.Common.Utility.NUnitTest.Crypto
 
             var decrypt = RSAHelper.DecryptString(priKey, encyypted);
 
-            Assert.IsTrue(decrypt== "testsetsetset");
+            Assert.IsTrue(decrypt == "testsetsetset");
         }
 
     }

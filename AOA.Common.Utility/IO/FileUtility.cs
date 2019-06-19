@@ -1,8 +1,9 @@
-﻿using AOA.Common.Utility.ClassExtensions;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+
+using AOA.Common.Utility.ClassExtensions;
 
 namespace AOA.Common.Utility.IO
 {
@@ -70,7 +71,7 @@ namespace AOA.Common.Utility.IO
                 }
             }
             return tmpFileName;
-        } 
+        }
         #endregion
 
         #region LoadFileToByteArray 读取文件到字节数组

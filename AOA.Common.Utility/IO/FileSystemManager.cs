@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.IO;
-using System.Threading;
-using System.Configuration;
 
 namespace AOA.Common.Utility.IO
 {

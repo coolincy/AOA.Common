@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Text;
 using System.IO;
-
-using ICSharpCode.SharpZipLib.GZip;
+using System.Text;
 
 using AOA.Common.Utility.ClassExtensions;
+
+using ICSharpCode.SharpZipLib.GZip;
 
 namespace AOA.Common.Utility.Compress
 {

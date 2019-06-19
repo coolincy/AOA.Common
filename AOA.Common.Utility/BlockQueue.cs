@@ -1,9 +1,10 @@
 using System;
-using System.Threading;
 using System.Collections;
+using System.Threading;
 
 namespace AOA.Common.Utility
 {
+
     /// <summary>
     /// 特殊队列对象，用于同步处理多消费者和多生产者之间关系定制．利用线程间通讯方式实现
     /// </summary>
@@ -283,6 +284,7 @@ namespace AOA.Common.Utility
         {
             throw new NotImplementedException("未实现.");
         }
+
     }
 
     /// <summary>
@@ -290,6 +292,7 @@ namespace AOA.Common.Utility
     /// </summary>
     public class QueueTimeoutException : Exception
     {
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -297,5 +300,7 @@ namespace AOA.Common.Utility
             : base("队列方法超时.")
         {
         }
+
     }
+
 }

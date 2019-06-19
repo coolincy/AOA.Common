@@ -1,7 +1,6 @@
 using System;
 using System.Configuration;
 
-using AOA.Common.Utility;
 using AOA.Common.Utility.ClassExtensions;
 
 namespace AOA.Common.Utility.CustomConfig

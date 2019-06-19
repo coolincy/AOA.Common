@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
+
+using Microsoft.Extensions.Configuration;
 
 namespace AOA.Common.Utility
 {

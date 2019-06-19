@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AOA.Common.Utility.ClassExtensions
+﻿namespace AOA.Common.Utility.ClassExtensions
 {
 
     /// <summary>

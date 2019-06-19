@@ -1,4 +1,3 @@
-using System;
 using System.Configuration;
 
 namespace AOA.Common.Utility.CustomConfig

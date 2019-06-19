@@ -1,0 +1,29 @@
+<Project>
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Authors>AOA Studio</Authors>
+        <Company>AOA Studio</Company>
+        <Copyright>AOA Studio</Copyright>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>2.1.3</Version>
+        <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
+        <Description>AOA.Common.Utility 通用工具类
+2.1.3 将不常用的压缩功能拆分到 AOA.Common.Utility.Compress
+2.1.2 升级 NLog 4.6.5
+2.1.1 fix ToJson 扩展添加一个格式化参数
+2.1.0 部分方法调整, ToJson 扩展添加一个格式化参数
+2.0.9 完善RSAHelper替代仅支持Windows的CryptographyRsa
+2.0.8 HardwareIdHelper.GetHardwareId 加入 CPUId
+2.0.7 添加 CPUInfoHelper
+2.0.6 添加 NetworkInterfaceHelper HardwareIdHelper
+2.0.5 添加 CRC16 算法，升级 NLog 4.6.3
+2.0.4 升级 NLog 4.6.2
+2.0.3 升级 SharpZipLib 1.1.0, NLog 4.6.0
+2.0.2 替换 ICSharpCode.SharpZipLib.Patched 0.86.5.1 为 SharpZipLib 1.0.0
+2.0.1 upgrade nuget packages
+2.0.0 upgrade for .net core 2.1.0
+1.0.3 fix bug under .net core: Timeouts are not supported on this stream</Description>
+    </PropertyGroup>
+
+</Project>

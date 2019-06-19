@@ -1,11 +1,7 @@
-﻿using System;
+﻿using System.Security.Cryptography;
 using System.Text;
 
-using System.IO;
-using System.Security.Cryptography;
-
 using AOA.Common.Utility.ClassExtensions;
-using AOA.Common.Utility.Compress;
 
 namespace AOA.Common.Utility.Crypto
 {

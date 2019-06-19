@@ -16,7 +16,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace AOA.Common.Utility.Net

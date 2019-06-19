@@ -244,8 +244,12 @@
     <Content Include="TestTool.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AOA.Common.Utility\AOA.Common.Utility.csproj">
+    <ProjectReference Include="..\AOA.Common.Utility.Compress\AOA.Common.Utility.Compress.csproj">
       <Project>{54bea196-e781-42f9-8e5e-12dda0070d94}</Project>
+      <Name>AOA.Common.Utility.Compress</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility\AOA.Common.Utility.csproj">
+      <Project>{9fa0ad1f-f742-4a6f-93bf-34f1db75a07b}</Project>
       <Name>AOA.Common.Utility</Name>
     </ProjectReference>
   </ItemGroup>

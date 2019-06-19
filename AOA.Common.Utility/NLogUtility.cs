@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 
-using NLog;
-
 using AOA.Common.Utility.ClassExtensions;
+
+using NLog;
 
 namespace AOA.Common.Utility
 {
@@ -568,4 +568,5 @@ namespace AOA.Common.Utility
         #endregion
 
     }
+
 }

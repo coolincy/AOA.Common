@@ -106,12 +106,12 @@ namespace AOA.Common.Test
 
         private void btnDes_Click(object sender, EventArgs e)
         {
-            txt33.Text = Cryptography.DelphiDesEncryptToBase64(txt32.Text, txt31.Text);
+            txt33.Text = CryptographyDesForDelphi.DelphiDesEncryptToBase64(txt32.Text, txt31.Text);
         }
 
         private void btnUnDes_Click(object sender, EventArgs e)
         {
-            txt34.Text = Cryptography.DelphiDesDecryptFromBase64(txt32.Text, txt33.Text);
+            txt34.Text = CryptographyDesForDelphi.DelphiDesDecryptFromBase64(txt32.Text, txt33.Text);
         }
 
         private void btnN91Des_Click(object sender, EventArgs e)
@@ -255,22 +255,22 @@ namespace AOA.Common.Test
 
         private void btnZipDes_Click(object sender, EventArgs e)
         {
-            txt53.Text = Cryptography.ZipAndDelphiDesToBase64(txt52.Text, txt51.Text);
+            txt53.Text = CryptographyDesForDelphi.ZipAndDelphiDesToBase64(txt52.Text, txt51.Text);
         }
 
         private void btnUnDesUnZip_Click(object sender, EventArgs e)
         {
-            txt54.Text = Cryptography.UnDelphiDesAndUnZipFromBase64(txt52.Text, txt53.Text);
+            txt54.Text = CryptographyDesForDelphi.UnDelphiDesAndUnZipFromBase64(txt52.Text, txt53.Text);
         }
 
         private void btnZip3Des_Click(object sender, EventArgs e)
         {
-            txt63.Text = Cryptography.GZipAnd3DesToBase64(txt62.Text, txt61.Text);
+            txt63.Text = CryptographyTripleDesCompress.GZipAnd3DesToBase64(txt62.Text, txt61.Text);
         }
 
         private void btnUn3DesUnZip_Click(object sender, EventArgs e)
         {
-            txt64.Text = Cryptography.Un3DesAndUnGZipFromBase64(txt62.Text, txt63.Text);
+            txt64.Text = CryptographyTripleDesCompress.Un3DesAndUnGZipFromBase64(txt62.Text, txt63.Text);
         }
 
         private void btnRsaKey_Click(object sender, EventArgs e)
