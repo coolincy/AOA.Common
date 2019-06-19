@@ -6,9 +6,10 @@
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>2.1.1</Version>
+        <Version>2.1.2</Version>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.1.2 升级 NLog 4.6.5
 2.1.1 fix ToJson 扩展添加一个格式化参数
 2.1.0 部分方法调整, ToJson 扩展添加一个格式化参数
 2.0.9 完善RSAHelper替代仅支持Windows的CryptographyRsa
@@ -36,7 +37,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-        <PackageReference Include="NLog" Version="4.6.4" />
+        <PackageReference Include="NLog" Version="4.6.5" />
         <PackageReference Include="SharpZipLib" Version="1.1.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
         <PackageReference Include="System.Management" Version="4.5.0" />
