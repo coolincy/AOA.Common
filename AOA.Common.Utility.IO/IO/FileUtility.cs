@@ -7,6 +7,7 @@ using AOA.Common.Utility.ClassExtensions;
 
 namespace AOA.Common.Utility.IO
 {
+
     /// <summary>
     /// 文件内容读写处理工具类
     /// </summary>
@@ -308,4 +309,5 @@ namespace AOA.Common.Utility.IO
         #endregion
 
     }
+
 }

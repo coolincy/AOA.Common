@@ -1,10 +1,8 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
 using AOA.Common.Utility.ClassExtensions;
-using AOA.Common.Utility.CustomConfig;
 
-namespace AOA.Common.Utility
+namespace AOA.Common.Utility.CustomConfig
 {
 
     /// <summary>
@@ -91,4 +89,5 @@ namespace AOA.Common.Utility
         #endregion
 
     }
+
 }

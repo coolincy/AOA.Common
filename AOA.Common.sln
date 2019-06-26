@@ -16,13 +16,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOA.Common.Utility.NUnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOA.Common.Test", "AOA.Common.Test\AOA.Common.Test.csproj", "{A5EE1604-88DF-40CF-8282-3CB674654487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOA.Common.Utility.Crypto", "AOA.Common.Utility.Crypto\AOA.Common.Utility.Crypto.csproj", "{BBCDB80F-BD93-41DA-B7D9-CCC9121B8DC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOA.Common.Utility.Crypto", "AOA.Common.Utility.Crypto\AOA.Common.Utility.Crypto.csproj", "{BBCDB80F-BD93-41DA-B7D9-CCC9121B8DC1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOA.Common.Utility.Hardware", "AOA.Common.Utility.Hardware\AOA.Common.Utility.Hardware.csproj", "{1787A449-F5C1-4704-817A-62C115FDE3E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOA.Common.Utility.CustomConfig", "AOA.Common.Utility.CustomConfig\AOA.Common.Utility.CustomConfig.csproj", "{9C507C81-F997-419D-A6F6-5DB5A7F0C0EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOA.Common.Utility.Net", "AOA.Common.Utility.Net\AOA.Common.Utility.Net.csproj", "{67669DE3-9021-4791-9E48-0A56B862EA51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOA.Common.Utility.IO", "AOA.Common.Utility.IO\AOA.Common.Utility.IO.csproj", "{4FD3F11F-F85C-4E6B-A664-E44D2D431950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{67669DE3-9021-4791-9E48-0A56B862EA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67669DE3-9021-4791-9E48-0A56B862EA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67669DE3-9021-4791-9E48-0A56B862EA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD3F11F-F85C-4E6B-A664-E44D2D431950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD3F11F-F85C-4E6B-A664-E44D2D431950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD3F11F-F85C-4E6B-A664-E44D2D431950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD3F11F-F85C-4E6B-A664-E44D2D431950}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

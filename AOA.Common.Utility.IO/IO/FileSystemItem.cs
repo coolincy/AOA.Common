@@ -2,11 +2,13 @@ using System;
 
 namespace AOA.Common.Utility.IO
 {
+
     /// <summary>
     /// FileSystemItem
     /// </summary>
     public class FileSystemItem
     {
+
         private string _Version;
 
         /// <summary>
@@ -67,4 +69,5 @@ namespace AOA.Common.Utility.IO
         }
 
     }
+
 }

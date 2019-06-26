@@ -260,6 +260,10 @@
       <Project>{1787a449-f5c1-4704-817a-62c115fde3e0}</Project>
       <Name>AOA.Common.Utility.Hardware</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility.IO\AOA.Common.Utility.IO.csproj">
+      <Project>{4fd3f11f-f85c-4e6b-a664-e44d2d431950}</Project>
+      <Name>AOA.Common.Utility.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AOA.Common.Utility.Net\AOA.Common.Utility.Net.csproj">
       <Project>{67669de3-9021-4791-9e48-0a56b862ea51}</Project>
       <Name>AOA.Common.Utility.Net</Name>

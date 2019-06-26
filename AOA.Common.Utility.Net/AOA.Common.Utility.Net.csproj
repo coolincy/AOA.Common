@@ -11,6 +11,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\AOA.Common.Utility.Crypto\AOA.Common.Utility.Crypto.csproj" />
     </ItemGroup>
 

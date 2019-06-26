@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 
 using AOA.Common.Utility.ClassExtensions;
+using AOA.Common.Utility.Crypto;
 
 namespace AOA.Common.Utility.CustomConfig
 {
@@ -87,6 +88,7 @@ namespace AOA.Common.Utility.CustomConfig
 
             return inStr;
         }
+
     }
 
 }

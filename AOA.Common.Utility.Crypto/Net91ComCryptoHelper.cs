@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AOA.Common.Utility
+namespace AOA.Common.Utility.Crypto
 {
 
     /// <summary>
