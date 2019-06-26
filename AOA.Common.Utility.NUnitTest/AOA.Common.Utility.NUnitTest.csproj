@@ -1,19 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="nunit" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AOA.Common.Utility\AOA.Common.Utility.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\AOA.Common.Utility.Compress\AOA.Common.Utility.Compress.csproj" />
+        <ProjectReference Include="..\AOA.Common.Utility.CustomConfig\AOA.Common.Utility.CustomConfig.csproj" />
+        <ProjectReference Include="..\AOA.Common.Utility.Hardware\AOA.Common.Utility.Hardware.csproj" />
+        <ProjectReference Include="..\AOA.Common.Utility.Net\AOA.Common.Utility.Net.csproj" />
+    </ItemGroup>
 
 </Project>

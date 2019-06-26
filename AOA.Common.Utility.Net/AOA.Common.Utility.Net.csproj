@@ -7,13 +7,8 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>bin\Release\netstandard2.0\AOA.Common.Utility.Compress.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\netstandard2.0\AOA.Common.Utility.Net.xml</DocumentationFile>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="SharpZipLib" Version="1.1.0" />
-        <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
-    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\AOA.Common.Utility.Crypto\AOA.Common.Utility.Crypto.csproj" />

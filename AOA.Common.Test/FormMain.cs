@@ -412,7 +412,7 @@ namespace AOA.Common.Test
                 foreach (ConnectionElement element in CustomConfigHelper.Connections)
                 {
                     txtConnStrs.AppendText(String.Format("Name = {0}, Conn = {1}, Read = {2}, Write = {3}{4}", element.ConnName, element.ConnString, element.ReadString, element.WriteString, Environment.NewLine));
-                    txtConnStrs.AppendText(ConfigReader.GetDefaultConnectionString(element.ConnName) + Environment.NewLine);
+                    txtConnStrs.AppendText(ConnectionStringConfigReader.GetDefaultConnectionString(element.ConnName) + Environment.NewLine);
                 }
             }
             var configroot = AppSettingsHelper.Get();

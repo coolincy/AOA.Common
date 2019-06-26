@@ -248,6 +248,22 @@
       <Project>{54bea196-e781-42f9-8e5e-12dda0070d94}</Project>
       <Name>AOA.Common.Utility.Compress</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility.Crypto\AOA.Common.Utility.Crypto.csproj">
+      <Project>{bbcdb80f-bd93-41da-b7d9-ccc9121b8dc1}</Project>
+      <Name>AOA.Common.Utility.Crypto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility.CustomConfig\AOA.Common.Utility.CustomConfig.csproj">
+      <Project>{9c507c81-f997-419d-a6f6-5db5a7f0c0ea}</Project>
+      <Name>AOA.Common.Utility.CustomConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility.Hardware\AOA.Common.Utility.Hardware.csproj">
+      <Project>{1787a449-f5c1-4704-817a-62c115fde3e0}</Project>
+      <Name>AOA.Common.Utility.Hardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AOA.Common.Utility.Net\AOA.Common.Utility.Net.csproj">
+      <Project>{67669de3-9021-4791-9e48-0a56b862ea51}</Project>
+      <Name>AOA.Common.Utility.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AOA.Common.Utility\AOA.Common.Utility.csproj">
       <Project>{9fa0ad1f-f742-4a6f-93bf-34f1db75a07b}</Project>
       <Name>AOA.Common.Utility</Name>
