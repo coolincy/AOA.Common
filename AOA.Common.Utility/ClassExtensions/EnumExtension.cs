@@ -27,7 +27,7 @@ namespace AOA.Common.Utility.ClassExtensions
         /// <returns></returns>
         public static string ToFullDescription(this Enum enumCode)
         {
-            return String.Format("{0}: {1}", enumCode, EnumDescriptionAttribute.GetFieldText(enumCode));
+            return string.Format("{0}: {1}", enumCode, EnumDescriptionAttribute.GetFieldText(enumCode));
         }
 
         /// <summary>

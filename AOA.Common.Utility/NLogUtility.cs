@@ -101,7 +101,7 @@ namespace AOA.Common.Utility
                     logger.Log(logEvent);
                 }
                 else
-                    Console.WriteLine(String.Format("Logger {0} is Null", loggerName));
+                    Console.WriteLine(string.Format("Logger {0} is Null", loggerName));
             }
             catch (Exception ex)
             {
@@ -205,6 +205,21 @@ namespace AOA.Common.Utility
 
         #region ExceptionLog 记录异常日志
 
+        private static string GetInnerExceptionInfo(Exception ex, int level = 1)
+        {
+            if (ex != null && ex.InnerException != null)
+            {
+                return $@"InnerException {level} -- Message:{ex.InnerException.Message}
+StackTrace:
+{ex.InnerException.StackTrace}
+{GetInnerExceptionInfo(ex.InnerException, level + 1)}".Replace(@"
+", @"
+  ").Trim();
+            }
+            else
+                return "";
+        }
+
         #region ExceptionLog(Exception ex, string eventPrefix, string subDir, string extInfo)
         /// <summary>
         /// 记录异常日志
@@ -215,13 +230,21 @@ namespace AOA.Common.Utility
         /// <param name="extInfo">附加的记录信息</param>
         public static void ExceptionLog(Exception ex, string eventPrefix, string subDir, string extInfo)
         {
+            if (ex == null)
+                return;
+
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
             Dictionary<string, string> dictVariable = new Dictionary<string, string>();
             dictVariable.Add("EventPrefix", eventPrefix);
             dictVariable.Add("SubDir", subDir);
-            string message = String.Format("Message:{1}{0}StackTrace:{0}{2}{0}ExtInfo:{0}{3}", Environment.NewLine, ex.Message, ex.StackTrace, extInfo);
+            string message = $@"Message:{ex.Message}
+StackTrace:
+{ex.StackTrace}
+ExtInfo:
+{extInfo}
+{GetInnerExceptionInfo(ex)}";
             Log("ExceptionLog", LogLevel.Error, message, dictVariable);
         }
         #endregion
@@ -383,11 +406,8 @@ namespace AOA.Common.Utility
             else if (!canOverride)
                 dictVariable["IPAddress"] = ipAddress;
 
-
-            message = message.Replace(Environment.NewLine, " ").Replace("\r", " ").Replace("\n", " ");
-
+            //message = message.Replace(Environment.NewLine, " ").Replace("\r", " ").Replace("\n", " ");
             Log(loggerName, logLevel, message, dictVariable);
-
 
             // 当接口调用时间超过 CallLazyTime 指定的毫秒时，需要特殊记录
             if (milliseconds >= lazyTime)
@@ -428,7 +448,12 @@ namespace AOA.Common.Utility
         public static void CallErrorLog(DateTime callBegin, DateTime callEnd, int appid, string ipAddress,
             Dictionary<string, string> dictVariable, Exception ex, string extInfo, bool canOverride = true)
         {
-            string message = String.Format("Message:{1}{0}StackTrace:{0}{2}{0}ExtInfo:{0}{3}", Environment.NewLine, ex.Message, ex.StackTrace, extInfo);
+            string message = $@"Message:{ex.Message}
+StackTrace:
+{ex.StackTrace}
+ExtInfo:
+{extInfo}
+{GetInnerExceptionInfo(ex)}";
             CallLog(callBegin, callEnd, "CallErrorLog", LogLevel.Error, appid, ipAddress, dictVariable, message, canOverride);
         }
         #endregion
@@ -538,7 +563,12 @@ namespace AOA.Common.Utility
         public static void CallErrorLog(int appid, DateTime callBegin, DateTime callEnd, string action, string callSource,
             string ipAddress, string sessionId, int sessionState, long userId, string userName, int resultCode, Exception ex, string extInfo)
         {
-            string message = String.Format("Message:{1}{0}StackTrace:{0}{2}{0}ExtInfo:{0}{3}", Environment.NewLine, ex.Message, ex.StackTrace, extInfo);
+            string message = $@"Message:{ex.Message}
+StackTrace:
+{ex.StackTrace}
+ExtInfo:
+{extInfo}
+{GetInnerExceptionInfo(ex)}";
             CallLog(appid, callBegin, callEnd, action, callSource, ipAddress, sessionId, sessionState, userId, userName, resultCode, "CallErrorLog", LogLevel.Error, message);
         }
         #endregion

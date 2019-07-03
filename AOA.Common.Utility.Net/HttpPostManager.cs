@@ -46,7 +46,7 @@ namespace AOA.Common.Utility.Net
             }
             catch (Exception ex)
             {
-                NLogUtility.ExceptionLog(ex, "CloseRequestResponse", "HttpPostManager", String.Format("{0}{1}StatusCode = {2}", url, Environment.NewLine, statusCode));
+                NLogUtility.ExceptionLog(ex, "CloseRequestResponse", "HttpPostManager", string.Format("{0}{1}StatusCode = {2}", url, Environment.NewLine, statusCode));
             }
         }
         #endregion
@@ -106,7 +106,7 @@ namespace AOA.Common.Utility.Net
             }
             catch (Exception ex)
             {
-                NLogUtility.ExceptionLog(ex, "GetPostData", "HttpPostManager", String.Format("{0}:{1}", startTime.ToFullDateTimeWithMsString(), url));
+                NLogUtility.ExceptionLog(ex, "GetPostData", "HttpPostManager", string.Format("{0}:{1}", startTime.ToFullDateTimeWithMsString(), url));
                 responseStatusCode = (HttpStatusCode)(-1);
             }
             #endregion
@@ -140,7 +140,7 @@ namespace AOA.Common.Utility.Net
 
                         wex = ex;
                         NLogUtility.ExceptionLog(wex, "GetPostData", "HttpPostManager",
-                            String.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, responseStatusCode));
+                            string.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, responseStatusCode));
 
                         // 内部服务器错误，不读数据了
                         if (response != null && response.StatusCode == HttpStatusCode.InternalServerError)
@@ -234,7 +234,7 @@ namespace AOA.Common.Utility.Net
                         if (responseData != null)
                             exStr = responseTextEncoding.GetString(responseData);
                         NLogUtility.ExceptionLog(wex, "GetPostData", "HttpPostManager",
-                            String.Format("WebException-2: {1}{0}{2}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), exStr));
+                            string.Format("WebException-2: {1}{0}{2}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), exStr));
                     }
                 }
                 catch (Exception ex)
@@ -245,7 +245,7 @@ namespace AOA.Common.Utility.Net
                         responseStatusCode = (HttpStatusCode)(-1);
                     responseData = null;
                     NLogUtility.ExceptionLog(ex, "GetPostData", "HttpPostManager",
-                        String.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, responseStatusCode));
+                        string.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, responseStatusCode));
                 }
                 #endregion
             }
@@ -548,7 +548,7 @@ namespace AOA.Common.Utility.Net
                     statusCode = (HttpStatusCode)(-1);
 
                 NLogUtility.ExceptionLog(ex, "PostRequest", "HttpPostManager",
-                    String.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, statusCode));
+                    string.Format("WebException-1: {1}{2}{0}StatusCode = {3}", Environment.NewLine, startTime.ToFullDateTimeWithMsString(), url, statusCode));
 
                 // 内部服务器错误，不读数据了
                 if (response != null && response.StatusCode == HttpStatusCode.InternalServerError)

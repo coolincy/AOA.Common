@@ -334,13 +334,13 @@ namespace AOA.Common.Test
         private void btnCacheSetStr_Click(object sender, EventArgs e)
         {
             //int result = CommonCache.Instance.Set(cbCacheCatalog.Text, tbKey.Text, tbValue.Text);
-            //tbLog.AppendText(String.Format("{1} Set Value = {2}, Result = {3}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), tbValue.Text, result));
+            //tbLog.AppendText(string.Format("{1} Set Value = {2}, Result = {3}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), tbValue.Text, result));
         }
 
         private void btnCacheGetStr_Click(object sender, EventArgs e)
         {
             //string result = CommonCache.Instance.Get<string>(cbCacheCatalog.Text, tbKey.Text);
-            //tbLog.AppendText(String.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), result));
+            //tbLog.AppendText(string.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), result));
         }
 
         private void btnCacheSetObj_Click(object sender, EventArgs e)
@@ -348,16 +348,16 @@ namespace AOA.Common.Test
             //SessionState obj = new SessionState();
             //obj.SessionId = tbValue.Text;
             //int result = CommonCache.Instance.Set(cbCacheCatalog.Text, tbKey.Text, obj);
-            //tbLog.AppendText(String.Format("{1} Set Value = {2}, Result = {3}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), obj.SessionId, result));
+            //tbLog.AppendText(string.Format("{1} Set Value = {2}, Result = {3}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), obj.SessionId, result));
         }
 
         private void btnCacheGetObj_Click(object sender, EventArgs e)
         {
             //SessionState obj = CommonCache.Instance.Get<SessionState>(cbCacheCatalog.Text, tbKey.Text);
             //if (obj != null)
-            //    tbLog.AppendText(String.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), obj.SessionId));
+            //    tbLog.AppendText(string.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), obj.SessionId));
             //else
-            //    tbLog.AppendText(String.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), "null"));
+            //    tbLog.AppendText(string.Format("{1} Get Value = {2}{0}", Environment.NewLine, DateTime.Now.ToLongTimeString(), "null"));
         }
 
         private void cbCacheCatalog_SelectedIndexChanged(object sender, EventArgs e)
@@ -380,11 +380,50 @@ namespace AOA.Common.Test
             //CommonCache.Instance.ClearExternal();
         }
 
+        private void TestEx()
+        {
+            try
+            {
+                TestEx1();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("test excepteion", ex);
+            }
+        }
+
+        private void TestEx1()
+        {
+            try
+            {
+                TestEx2();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("inner1 test excepteion", ex);
+            }
+        }
+
+        private void TestEx2()
+        {
+            throw (new Exception("inner2 test excepteion"));
+        }
+
         private void btnTestLog_Click(object sender, EventArgs e)
         {
             NLogUtility.InfoLog("test message", "prefix", "subDir");
             NLogUtility.DebugLog("debug message", "prefix", "subDir");
-            NLogUtility.ExceptionLog(new Exception("test excepteion"), "prefix", "subDir", "extInfo");
+            Exception ex = null;
+            try
+            {
+                TestEx();
+            }
+            catch (Exception ex1)
+            {
+                ex = ex1;
+            }
+
+            NLogUtility.ExceptionLog(ex, "prefix", "subDir", "extInfo");
             Dictionary<string, string> dictVariable = new Dictionary<string, string>();
             //NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, "call message");
             dictVariable.Add("Action", "action");
@@ -395,8 +434,8 @@ namespace AOA.Common.Test
             dictVariable.Add("UserName", "UserName");
             dictVariable.Add("ResultCode", "0");
             NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, "call message");
-            //NLogUtility.CallErrorLog(100010, DateTime.Now.AddMinutes(-1), DateTime.Now, "action", "callSource", "127.0.0.1", "sessionId", 1, 100000, "UserName", 0, new Exception("test excepteion"), "ext message");
-            NLogUtility.CallErrorLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, new Exception("test excepteion"), "ext message");
+            //NLogUtility.CallErrorLog(100010, DateTime.Now.AddMinutes(-1), DateTime.Now, "action", "callSource", "127.0.0.1", "sessionId", 1, 100000, "UserName", 0, ex, "ext message");
+            NLogUtility.CallErrorLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, ex, "ext message");
         }
 
         private void btnDoubleToChnMoney_Click(object sender, EventArgs e)
@@ -411,7 +450,7 @@ namespace AOA.Common.Test
             {
                 foreach (ConnectionElement element in CustomConfigHelper.Connections)
                 {
-                    txtConnStrs.AppendText(String.Format("Name = {0}, Conn = {1}, Read = {2}, Write = {3}{4}", element.ConnName, element.ConnString, element.ReadString, element.WriteString, Environment.NewLine));
+                    txtConnStrs.AppendText(string.Format("Name = {0}, Conn = {1}, Read = {2}, Write = {3}{4}", element.ConnName, element.ConnString, element.ReadString, element.WriteString, Environment.NewLine));
                     txtConnStrs.AppendText(ConnectionStringConfigReader.GetDefaultConnectionString(element.ConnName) + Environment.NewLine);
                 }
             }
@@ -463,7 +502,7 @@ namespace AOA.Common.Test
             DateTime dtNow = DateTime.Now;
             HttpStatusCode statusCode;
             string resultText = HttpPostManager.GetStringData(txtUrlToGet.Text, out statusCode, maxReadLen: int.Parse(txtGetLength.Text));
-            txtHttpGetResult.Text = String.Format("{0}:{1}{2}{3}",
+            txtHttpGetResult.Text = string.Format("{0}:{1}{2}{3}",
                 statusCode, (DateTime.Now - dtNow).TotalMilliseconds, Environment.NewLine, resultText);
         }
 
@@ -523,7 +562,7 @@ namespace AOA.Common.Test
             //        decOK = false;
             //    }
 
-            //    ThreadRunning(String.Format("{0}: Decrement = {1}: {2}{3}", Thread.CurrentThread.ManagedThreadId, decOK, (long)lastValue - baseValue, Environment.NewLine));
+            //    ThreadRunning(string.Format("{0}: Decrement = {1}: {2}{3}", Thread.CurrentThread.ManagedThreadId, decOK, (long)lastValue - baseValue, Environment.NewLine));
             //}
         }
 
@@ -531,14 +570,14 @@ namespace AOA.Common.Test
         {
             //MemcachedClient mClient = new MemcachedClient();
             //ulong lastValue = mClient.Increment(tbKey.Text, baseValue, 1000);
-            //tbLog.AppendText(String.Format("Increment = true: {0}{1}", (long)lastValue - baseValue, Environment.NewLine));
+            //tbLog.AppendText(string.Format("Increment = true: {0}{1}", (long)lastValue - baseValue, Environment.NewLine));
         }
 
         private void btnToZero_Click(object sender, EventArgs e)
         {
             //MemcachedClient mClient = new MemcachedClient();
             //bool decOK = mClient.Store(StoreMode.Set, tbKey.Text, baseValue.ToString());
-            //tbLog.AppendText(String.Format("ToZero = {0}: 0{1}", decOK, Environment.NewLine));
+            //tbLog.AppendText(string.Format("ToZero = {0}: 0{1}", decOK, Environment.NewLine));
         }
 
         private void btnGATest_Click(object sender, EventArgs e)

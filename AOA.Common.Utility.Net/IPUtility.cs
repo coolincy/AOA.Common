@@ -86,9 +86,9 @@ namespace AOA.Common.Utility.Net
 
             // 各个数字乘以相应的数量级
             if (bigEndian) // 各个数字乘以相应的数量级(高位在前)
-                return String.Format("{0}.{1}.{2}.{3}", ipNum[0], ipNum[1], ipNum[2], ipNum[3]);
+                return string.Format("{0}.{1}.{2}.{3}", ipNum[0], ipNum[1], ipNum[2], ipNum[3]);
             else
-                return String.Format("{0}.{1}.{2}.{3}", ipNum[3], ipNum[2], ipNum[1], ipNum[0]);
+                return string.Format("{0}.{1}.{2}.{3}", ipNum[3], ipNum[2], ipNum[1], ipNum[0]);
         }
         #endregion
 

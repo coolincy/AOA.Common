@@ -237,16 +237,16 @@ namespace AOA.Common.Utility.Net
             requestHeaders.Add("Accept-Language", "zh-cn");
             requestHeaders.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; AOA.Common.Utility)");
 
-            string headers = String.Format("{0}\r\n", request);
+            string headers = string.Format("{0}\r\n", request);
 
             foreach (string key in requestHeaders)
             {
-                headers += String.Format("{0}:{1}\r\n", key, requestHeaders[key]);
+                headers += string.Format("{0}:{1}\r\n", key, requestHeaders[key]);
             }
 
             //有Cookie就带上Cookie
             if (cookie != "")
-                headers += String.Format("Cookie:{0}\r\n", cookie);
+                headers += string.Format("Cookie:{0}\r\n", cookie);
 
             //空行，请求头结束
             headers += "\r\n";
@@ -363,7 +363,7 @@ namespace AOA.Common.Utility.Net
             clientSocket.Connect(URI.Host, URI.Port);
 
             requestHeaders.Add("Host", URI.Host);
-            byte[] request = GetRequestHeaders(String.Format("{0} {1} HTTP/1.1", method, URI.PathAndQuery));
+            byte[] request = GetRequestHeaders(string.Format("{0} {1} HTTP/1.1", method, URI.PathAndQuery));
             clientSocket.Client.Send(request);
 
             //若有实体内容就发送它
@@ -704,7 +704,7 @@ namespace AOA.Common.Utility.Net
                 throw new Exception("文本域和文件域不能同时为空。");
 
             //写入结束标记
-            byte[] buffer = encoding.GetBytes(String.Format("--{0}--\r\n", BOUNDARY));
+            byte[] buffer = encoding.GetBytes(string.Format("--{0}--\r\n", BOUNDARY));
             postStream.Write(buffer, 0, buffer.Length);
 
             //添加请求标头

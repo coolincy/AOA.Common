@@ -212,11 +212,11 @@ namespace AOA.Common.Utility.ClassExtensions
                 }
                 catch (Exception ex)
                 {
-                    NLogUtility.ExceptionLog(ex, "GetFieldTexts", "EnumDescription", String.Format("通过反射获得{0}的字段的描述信息", enumType.Name));
+                    NLogUtility.ExceptionLog(ex, "GetFieldTexts", "EnumDescription", string.Format("通过反射获得{0}的字段的描述信息", enumType.Name));
                 }
                 //}
                 if (descriptions.Length <= 0)
-                    throw new NotSupportedException(String.Format("枚举类型[{0}]未定义属性EnumValueDescription", enumType.Name));
+                    throw new NotSupportedException(string.Format("枚举类型[{0}]未定义属性EnumValueDescription", enumType.Name));
 
                 // 按指定的属性冒泡排序
                 for (int m = 0; m < descriptions.Length; m++)

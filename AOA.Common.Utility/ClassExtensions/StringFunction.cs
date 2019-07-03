@@ -432,15 +432,15 @@ namespace AOA.Common.Utility.ClassExtensions
             int querystart = url.IndexOf("?");
             if (querystart < 0)
             {
-                url += String.Format("?{0}={1}", key, value);
+                url += string.Format("?{0}={1}", key, value);
             }
             else
             {
-                Regex reg = new Regex(String.Format(@"(?<=[&\?]){0}=[^\s&#]*", key), RegexOptions.Compiled);
+                Regex reg = new Regex(string.Format(@"(?<=[&\?]){0}=[^\s&#]*", key), RegexOptions.Compiled);
                 if (reg.IsMatch(url))
-                    url = reg.Replace(url, String.Format("{0}={1}", key, value));
+                    url = reg.Replace(url, string.Format("{0}={1}", key, value));
                 else
-                    url += String.Format("&{0}={1}", key, value);
+                    url += string.Format("&{0}={1}", key, value);
             }
             return url + fragment;
         }
@@ -455,7 +455,7 @@ namespace AOA.Common.Utility.ClassExtensions
         /// <returns>添加参数后的URL地址</returns>
         public static string UrlSafeRemoveQuery(this string url, string key)
         {
-            Regex reg = new Regex(String.Format(@"[&\?]{0}=[^\s&#]*&?", key), RegexOptions.Compiled);
+            Regex reg = new Regex(string.Format(@"[&\?]{0}=[^\s&#]*&?", key), RegexOptions.Compiled);
             return reg.Replace(url, PutAwayGarbageFromURL);
         }
 

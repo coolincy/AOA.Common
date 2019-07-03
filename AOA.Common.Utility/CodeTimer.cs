@@ -89,16 +89,16 @@ namespace AOA.Common.Utility
 
             // 4. Print CPU
             Console.ForegroundColor = currentForeColor;
-            Console.WriteLine(String.Format("\tTime Elapsed:\t{0:N0}ms", watch.ElapsedMilliseconds));
-            Console.WriteLine(String.Format("\tTime Elapsed (one time):{0:N0}ms", watch.ElapsedMilliseconds / iteration));
-            Console.WriteLine(String.Format("\tCPU Cycles:\t{0:N0}", cpuCycles));
-            Console.WriteLine(String.Format("\tCPU Cycles (one time):\t{0:N0}", cpuCycles / iteration));
+            Console.WriteLine(string.Format("\tTime Elapsed:\t{0:N0}ms", watch.ElapsedMilliseconds));
+            Console.WriteLine(string.Format("\tTime Elapsed (one time):{0:N0}ms", watch.ElapsedMilliseconds / iteration));
+            Console.WriteLine(string.Format("\tCPU Cycles:\t{0:N0}", cpuCycles));
+            Console.WriteLine(string.Format("\tCPU Cycles (one time):\t{0:N0}", cpuCycles / iteration));
 
             // 5. Print GC
             for (int i = 0; i <= GC.MaxGeneration; i++)
             {
                 int count = GC.CollectionCount(i) - gcCounts[i];
-                Console.WriteLine(String.Format("\tGen {0}: \t\t{1}", i, count));
+                Console.WriteLine(string.Format("\tGen {0}: \t\t{1}", i, count));
             }
 
             Console.WriteLine();

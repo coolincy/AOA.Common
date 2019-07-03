@@ -230,7 +230,7 @@ namespace AOA.Common.Utility.IO
         {
             try
             {
-                FileStream fs = File.Create(String.Format("{0}\\{1}", path, filename));
+                FileStream fs = File.Create(string.Format("{0}\\{1}", path, filename));
                 fs.Close();
                 return true;
             }
@@ -253,7 +253,7 @@ namespace AOA.Common.Utility.IO
         {
             try
             {
-                FileStream fs = File.Create(String.Format("{0}\\{1}", path, filename));
+                FileStream fs = File.Create(string.Format("{0}\\{1}", path, filename));
                 fs.Write(contents, 0, contents.Length);
                 fs.Close();
                 return true;
