@@ -4,6 +4,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <Product>AOA Common Utility Crypto</Product>
+        <PackageTags>AOA Common Utility Crypto</PackageTags>
+        <PackageReleaseNotes>AOA Common Utility Crypto</PackageReleaseNotes>
+        <AssemblyName>AOA.Common.Utility.Crypto</AssemblyName>
+        <PackageId>AOA.Common.Utility.Crypto</PackageId>
+        <RootNamespace>AOA.Common.Utility.Crypto</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

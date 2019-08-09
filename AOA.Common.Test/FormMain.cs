@@ -1,28 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Net;
-using System.Windows.Forms;
-
-using AOA.Common.Utility;
+﻿using AOA.Common.Utility;
 using AOA.Common.Utility.ClassExtensions;
 using AOA.Common.Utility.Compress;
-using AOA.Common.Utility.CustomConfig;
-using AOA.Common.Utility.Net;
 using AOA.Common.Utility.Crypto;
-using Microsoft.Extensions.Configuration;
+using AOA.Common.Utility.CustomConfig;
 using AOA.Common.Utility.Hardware;
+using AOA.Common.Utility.IO;
+using AOA.Common.Utility.Net;
+
+using Microsoft.Extensions.Configuration;
+
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace AOA.Common.Test
 {
+
     public partial class FormMain : Form
     {
+
         public FormMain()
         {
             InitializeComponent();
             cbCacheCatalog.Items.Clear();
-            var result = AOA.Common.Utility.IO.FileUtility.GetFullFileName("ss.txt");
+            var result = FileUtility.GetFullFileName("ss.txt");
             //if (CommonCache.Instance != null)
             //{
             //    foreach (KeyValuePair<string, CacheCatalog> catalogPair in CacheConfigFileManager.CurrentCacheConfiguration.CacheCatalogList)
@@ -616,11 +620,13 @@ namespace AOA.Common.Test
         {
             tbHwId.Text = CPUInfoHelper.GetCPUId();
         }
+
     }
 
     [Serializable]
     public class aClass
     {
+
         public string s1;
         public string s2;
         public int i1;
@@ -637,6 +643,7 @@ namespace AOA.Common.Test
             sList.Add(s1);
             sList.Add(s2);
         }
+
     }
 
 }

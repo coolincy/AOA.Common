@@ -4,6 +4,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <Product>AOA Common Utility Hardware</Product>
+        <PackageTags>AOA Common Utility Hardware</PackageTags>
+        <PackageReleaseNotes>AOA Common Utility Hardware</PackageReleaseNotes>
+        <AssemblyName>AOA.Common.Utility.Hardware</AssemblyName>
+        <PackageId>AOA.Common.Utility.Hardware</PackageId>
+        <RootNamespace>AOA.Common.Utility.Hardware</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
