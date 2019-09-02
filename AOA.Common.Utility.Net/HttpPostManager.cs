@@ -63,7 +63,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="responseTextEncoding">服务器返回的字符编码</param>
         /// <param name="responseContentType">服务器返回的Content-type 的值</param>
         /// <param name="httpRequestTimeOut">请求超时时间，不传或小于等于0使用配置中的超时时间</param>
-        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] HttpRequest(string url, string httpMethod, string requestContentType, byte[] postBytes,
@@ -267,7 +266,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="responseStatusCode">Http服务器返回的状态码</param>
         /// <param name="responseTextEncoding">服务器返回的字符编码</param>
         /// <param name="httpRequestTimeOut">请求超时时间，不传或小于等于0使用配置中的超时时间</param>
-        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] HttpRequest(string url, string httpMethod, string requestContentType, byte[] postBytes,
@@ -290,7 +288,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="url">请求地址URL</param>
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字节数组</returns>
         public static byte[] GetByteData(string url, out HttpStatusCode statusCode,
@@ -322,7 +319,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="url">请求地址URL</param>
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字符串</returns>
         public static string GetStringData(string url, out HttpStatusCode statusCode,
@@ -360,7 +356,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="encoding">服务器返回的字符编码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        ///// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的二进制数据</returns>
         public static byte[] GetPostData(string url, byte[] postBytes, out HttpStatusCode statusCode, out Encoding encoding,
@@ -394,7 +389,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="postStr">要发送的字符串</param>
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回的字符串</returns>
         public static string GetPostString(string url, string postStr, out HttpStatusCode statusCode,
@@ -430,7 +424,6 @@ namespace AOA.Common.Utility.Net
         /// <param name="paramStr">请求参数</param>
         /// <param name="statusCode">Http服务器返回的状态码</param>
         /// <param name="httpRequestTimeOut">超时时间，不传或小于等于0使用配置中的超时时间</param>
-        /// <param name="httpReadTimeOut">读取超时时间，不传或小于等于0使用配置中的超时时间</param>
         /// <param name="maxReadLen">最多读取的字节数</param>
         /// <returns>返回字符串</returns>
         public static string GetStringByFormPost(string url, string paramStr, out HttpStatusCode statusCode,

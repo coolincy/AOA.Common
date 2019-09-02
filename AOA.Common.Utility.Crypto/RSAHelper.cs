@@ -238,7 +238,6 @@ namespace AOA.Common.Utility.Crypto
         /// </summary>
         /// <param name="privateKey">Json表示的私钥</param>
         /// <param name="data">原始数据</param>
-        /// <param name="hashAlgorithmName">哈希算法</param>
         /// <returns></returns>
         public static string Sign(string privateKey, byte[] data)
         {
@@ -252,7 +251,6 @@ namespace AOA.Common.Utility.Crypto
         /// </summary>
         /// <param name="privateKey">Json表示的私钥</param>
         /// <param name="data">原始数据</param>
-        /// <param name="hashAlgorithmName">哈希算法</param>
         /// <returns></returns>
         public static string Sign(string privateKey, string data)
         {

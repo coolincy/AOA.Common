@@ -17,6 +17,7 @@ namespace AOA.Common.Utility.Crypto
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="privateKey"></param>
+        /// <param name="dwKeySize">密钥长度</param>
         public static void GenRSAKeyPair(out string publicKey, out string privateKey, int dwKeySize = 512)
         {
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(dwKeySize))

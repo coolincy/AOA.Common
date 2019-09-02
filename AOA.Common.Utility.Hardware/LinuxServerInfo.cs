@@ -96,7 +96,7 @@ namespace AOA.Common.Utility.Hardware
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
             return networkInfo;
@@ -221,7 +221,7 @@ namespace AOA.Common.Utility.Hardware
                         process.WaitForExit(50000);
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
