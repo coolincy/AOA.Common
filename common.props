@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <Version>2.1.6.1</Version>
+        <Version>2.1.7</Version>
         <Authors>AOA Studio</Authors>
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
@@ -10,6 +10,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.1.7 AOA.Common.Utility.Hardware 添加UUID获取
 2.1.6.1 upgrade nuget packages
 2.1.6 升级 NLog 4.6.6, 修改个库的描述信息
 2.1.5 NLogUtility.ExceptionLog 添加对 InnerException 的处理

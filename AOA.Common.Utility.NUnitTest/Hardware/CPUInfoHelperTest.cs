@@ -18,9 +18,17 @@ namespace AOA.Common.Utility.NUnitTest.Hardware
         [Test]
         public void GetCPUIdTest()
         {
-            var cpuId = CPUInfoHelper.GetCPUId();
-            Console.WriteLine(cpuId);
-            Assert.IsNotEmpty(cpuId);
+            var id = CPUInfoHelper.GetCPUId();
+            Console.WriteLine(id);
+            Assert.IsNotEmpty(id);
+        }
+
+        [Test]
+        public void SystemUUIDTest()
+        {
+            var id = CPUInfoHelper.GetSystemUUID();
+            Console.WriteLine(id);
+            Assert.IsNotEmpty(id);
         }
 
     }
