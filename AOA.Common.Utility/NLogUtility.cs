@@ -364,9 +364,9 @@ namespace AOA.Common.Utility
                 return;
 
             if (!dictVariable.ContainsKey("CallBegin"))
-                dictVariable.Add("CallBegin", callBegin.ToFullDateTimeString());
+                dictVariable.Add("CallBegin", callBegin);
             else if (!canOverride)
-                dictVariable["CallBegin"] = callBegin.ToFullDateTimeString();
+                dictVariable["CallBegin"] = callBegin;
 
             if (!dictVariable.ContainsKey("CallBeginDate"))
                 dictVariable.Add("CallBeginDate", callBegin.ToFullDateString());
@@ -378,16 +378,10 @@ namespace AOA.Common.Utility
             else if (!canOverride)
                 dictVariable["CallBeginTime"] = callBegin.ToFullTimeWithMsString();
 
-            if (!dictVariable.ContainsKey("CallBeginHour"))
-                dictVariable.Add("CallBeginHour", callBegin.ToString("HH"));
-            else if (!canOverride)
-                dictVariable["CallBeginHour"] = callBegin.ToString("HH");
-
-
             if (!dictVariable.ContainsKey("CallEnd"))
-                dictVariable.Add("CallEnd", callEnd.ToFullDateTimeString());
+                dictVariable.Add("CallEnd", callEnd);
             else if (!canOverride)
-                dictVariable["CallEnd"] = callEnd.ToFullDateTimeString();
+                dictVariable["CallEnd"] = callEnd;
 
             if (!dictVariable.ContainsKey("CallEndDate"))
                 dictVariable.Add("CallEndDate", callEnd.ToFullDateString());
@@ -399,17 +393,12 @@ namespace AOA.Common.Utility
             else if (!canOverride)
                 dictVariable["CallEndTime"] = callEnd.ToFullTimeWithMsString();
 
-            if (!dictVariable.ContainsKey("CallEndHour"))
-                dictVariable.Add("CallEndHour", callEnd.ToString("HH"));
-            else if (!canOverride)
-                dictVariable["CallEndHour"] = callEnd.ToString("HH");
-
 
             double milliseconds = (callEnd - callBegin).TotalMilliseconds;
-            if (!dictVariable.ContainsKey("Milliseconds"))
-                dictVariable.Add("Milliseconds", milliseconds.ToString("0.000"));
+            if (!dictVariable.ContainsKey("Elapsed"))
+                dictVariable.Add("Elapsed", milliseconds);
             else if (!canOverride)
-                dictVariable["Milliseconds"] = milliseconds.ToString("0.000");
+                dictVariable["Elapsed"] = milliseconds;
 
 
             Log(loggerName, logLevel, message, dictVariable);

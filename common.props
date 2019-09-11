@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <Version>2.1.8.1</Version>
+        <Version>2.1.8.2</Version>
         <Authors>AOA Studio</Authors>
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
@@ -10,6 +10,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+2.1.8.2 调整 NLogUtility.CallLog 部分输出字段类型
 2.1.8.1 调整 NLogUtility 日志扩展字段类型从 string 改为 object
 2.1.8 调整 NLogUtility.CallLog 方法
 2.1.7 AOA.Common.Utility.Hardware 添加UUID获取
