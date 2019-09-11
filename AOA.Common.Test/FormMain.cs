@@ -431,15 +431,16 @@ namespace AOA.Common.Test
             Dictionary<string, string> dictVariable = new Dictionary<string, string>();
             //NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, "call message");
             dictVariable.Add("Action", "action");
+            dictVariable.Add("ProductId", "product");
             dictVariable.Add("CallSource", "callSource");
             dictVariable.Add("SessionId", "sessionId");
             dictVariable.Add("SessionState", "1");
             dictVariable.Add("UserId", "100000");
             dictVariable.Add("UserName", "UserName");
             dictVariable.Add("ResultCode", "0");
-            NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, "call message");
+            NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, dictVariable, "call message");
             //NLogUtility.CallErrorLog(100010, DateTime.Now.AddMinutes(-1), DateTime.Now, "action", "callSource", "127.0.0.1", "sessionId", 1, 100000, "UserName", 0, ex, "ext message");
-            NLogUtility.CallErrorLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, ex, "ext message");
+            NLogUtility.CallErrorLog(DateTime.Now.AddMinutes(-1), DateTime.Now, dictVariable, ex, "ext message");
         }
 
         private void btnDoubleToChnMoney_Click(object sender, EventArgs e)

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
 
 using AOA.Common.Utility.ClassExtensions;
-
+using Microsoft.Extensions.Configuration;
 using NLog;
 
 namespace AOA.Common.Utility
@@ -15,22 +15,10 @@ namespace AOA.Common.Utility
     public class NLogUtility
     {
 
-        private static ReaderWriterLockSlim readWriteLockSlim;
-        private static Dictionary<string, Logger> loggerList = new Dictionary<string, Logger>();
+        private static readonly object loggerLock = new object();
+        private static readonly Dictionary<string, Logger> loggerList = new Dictionary<string, Logger>();
 
-        #region NLogUtility 静态构建函数
-        /// <summary>
-        /// 静态构建函数
-        /// </summary>
-        static NLogUtility()
-        {
-            readWriteLockSlim = new ReaderWriterLockSlim();
-            if (loggerList == null)
-                loggerList = new Dictionary<string, Logger>();
-        }
-        #endregion
-
-        #region GetLogger 获取Logger(使用缓存)
+        #region GetLogger(string loggerName) 获取Logger(使用缓存)
         /// <summary>
         /// 获取Logger(使用缓存)
         /// </summary>
@@ -38,48 +26,45 @@ namespace AOA.Common.Utility
         /// <returns></returns>
         public static Logger GetLogger(string loggerName)
         {
-            bool fromCache = false;
             Logger logger = null;
 
-            // 从缓存读取Logger
-            readWriteLockSlim.EnterReadLock();
             try
             {
-                if (loggerList.ContainsKey(loggerName))
-                    logger = loggerList[loggerName];
-                if (logger != null)
-                    fromCache = true;
-            }
-            finally
-            {
-                readWriteLockSlim.ExitReadLock();
-            }
-
-            // 重新获取Logger
-            if (logger == null)
-                logger = LogManager.GetLogger(loggerName);
-
-            // 添加Logger到缓存
-            if (logger != null && !fromCache)
-            {
-                readWriteLockSlim.EnterWriteLock();
-                try
+                // 从缓存读取Logger
+                lock (loggerLock)
                 {
                     if (loggerList.ContainsKey(loggerName))
-                        loggerList[loggerName] = logger;
-                    else
-                        loggerList.Add(loggerName, logger);
+                        logger = loggerList[loggerName];
                 }
-                finally
+
+                if (logger == null)
                 {
-                    readWriteLockSlim.ExitWriteLock();
+                    // 重新获取Logger
+                    logger = LogManager.GetLogger(loggerName);
+                    // 添加Logger到缓存
+                    if (logger != null)
+                    {
+                        lock (loggerLock)
+                        {
+                            if (loggerList.ContainsKey(loggerName))
+                                loggerList[loggerName] = logger;
+                            else
+                                loggerList.Add(loggerName, logger);
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                // 如果这里出错了，那么扔掉日志信息
+                Console.WriteLine(ex.Message);
+            }
+
             return logger;
         }
         #endregion
 
-        #region Log 写日志
+        #region Log(string loggerName, LogLevel logLevel, string message, Dictionary<string, string> dictVariable) 写日志
         /// <summary>
         /// 写日志
         /// </summary>
@@ -125,10 +110,11 @@ namespace AOA.Common.Utility
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
-            Dictionary<string, string> dictVariable = new Dictionary<string, string>();
-            dictVariable.Add("EventPrefix", eventPrefix);
-            dictVariable.Add("SubDir", subDir);
-            Log("InfoLog", LogLevel.Info, message, dictVariable);
+            Log("InfoLog", LogLevel.Info, message, new Dictionary<string, string>
+            {
+                { "EventPrefix", eventPrefix },
+                { "SubDir", subDir }
+            });
         }
         #endregion
 
@@ -171,10 +157,11 @@ namespace AOA.Common.Utility
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
-            Dictionary<string, string> dictVariable = new Dictionary<string, string>();
-            dictVariable.Add("EventPrefix", eventPrefix);
-            dictVariable.Add("SubDir", subDir);
-            Log("DebugLog", LogLevel.Debug, message, dictVariable);
+            Log("DebugLog", LogLevel.Debug, message, new Dictionary<string, string>
+            {
+                { "EventPrefix", eventPrefix },
+                { "SubDir", subDir }
+            });
         }
         #endregion
 
@@ -209,15 +196,30 @@ namespace AOA.Common.Utility
         {
             if (ex != null && ex.InnerException != null)
             {
-                return $@"InnerException {level} -- Message:{ex.InnerException.Message}
-StackTrace:
-{ex.InnerException.StackTrace}
-{GetInnerExceptionInfo(ex.InnerException, level + 1)}".Replace(@"
-", @"
-  ").Trim();
+                string message = $"{Environment.NewLine}InnerException {level}";
+                message = $"{message} -- Message:{ex.InnerException.Message}{Environment.NewLine}";
+                message = $"{message}StackTrace:{Environment.NewLine}";
+                message = $"{message}{ex.InnerException.StackTrace}{Environment.NewLine}";
+                message = $"{message}{GetInnerExceptionInfo(ex.InnerException, level + 1)}";
+                return message.Replace(Environment.NewLine, Environment.NewLine + "  ").Trim();
             }
             else
                 return "";
+        }
+
+        private static string GetExceptionMessage(Exception ex, string extInfo)
+        {
+            if (ex == null)
+                return extInfo;
+
+            string message = $"Message:{ex.Message}{Environment.NewLine}";
+            message = $"{message}StackTrace:{Environment.NewLine}";
+            message = $"{message}{ex.StackTrace}{Environment.NewLine}";
+            message = $"{message}ExtInfo:{Environment.NewLine}";
+            if (!string.IsNullOrEmpty(extInfo))
+                message = $"{message}{extInfo}{Environment.NewLine}";
+            message = $"{message}{GetInnerExceptionInfo(ex)}";
+            return message;
         }
 
         #region ExceptionLog(Exception ex, string eventPrefix, string subDir, string extInfo)
@@ -236,20 +238,16 @@ StackTrace:
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
-            Dictionary<string, string> dictVariable = new Dictionary<string, string>();
-            dictVariable.Add("EventPrefix", eventPrefix);
-            dictVariable.Add("SubDir", subDir);
-            string message = $@"Message:{ex.Message}
-StackTrace:
-{ex.StackTrace}
-ExtInfo:
-{extInfo}
-{GetInnerExceptionInfo(ex)}";
-            Log("ExceptionLog", LogLevel.Error, message, dictVariable);
+            Log("ExceptionLog", LogLevel.Error, GetExceptionMessage(ex, extInfo),
+                new Dictionary<string, string>
+                {
+                    { "EventPrefix", eventPrefix },
+                    { "SubDir", subDir }
+                });
         }
         #endregion
 
-        #region ExceptionLog(Exception ex, string eventPrefix, string extInfo)
+        #region ExceptionLog(Exception ex, string eventPrefix, string subDir)
         /// <summary>
         /// 记录异常日志
         /// </summary>
@@ -289,38 +287,53 @@ ExtInfo:
 
         //===========================================================================================================================================
 
-        private static string actionIdsToWriteCallLog = ConfigReader.GetString("ActionIdsToWriteCallLog", "").Trim();
-        private static string actionIdsDontWriteCallLog = ConfigReader.GetString("ActionIdsDontWriteCallLog", "").Trim();
-        private static int lazyTime = ConfigReader.GetInt("CallLazyTime", 1000);
+        private static readonly string actionsToWriteCallLog = "";
+        private static readonly string actionsDontWriteCallLog = "";
+        private static readonly int lazyTime = ConfigReader.GetInt("CallLazyTime", 1000);
+
+        #region NLogUtility 静态构建函数
+        /// <summary>
+        /// 静态构建函数
+        /// </summary>
+        static NLogUtility()
+        {
+            var configroot = AppSettingsHelper.Get();
+            if (configroot != null)
+            {
+                actionsToWriteCallLog = configroot.GetSection("CallLog").GetValue("ActionsToWriteCallLog", "").Trim();
+                actionsDontWriteCallLog = configroot.GetSection("CallLog").GetValue("ActionsDontWriteCallLog", "").Trim();
+            }
+            if (loggerList == null)
+                loggerList = new Dictionary<string, Logger>();
+        }
+        #endregion
 
         #region CheckCanCallLog
-        private static bool CheckCanCallLog(string actionId)
+        private static bool CheckCanCallLog(string action)
         {
             bool canWriteLog = true;
 
             try
             {
-                // 检查是否被拒绝写日志
-                if (!string.IsNullOrEmpty(actionIdsDontWriteCallLog))
+                // 检查是否白名单
+                if (!string.IsNullOrEmpty(actionsToWriteCallLog))
                 {
-                    if (actionId.IsIntegerPositive())
-                        canWriteLog = !actionIdsDontWriteCallLog.ContainsUintValue(uint.Parse(actionId));
-                    else
-                        canWriteLog = actionIdsDontWriteCallLog.IndexOf("actionId") < 0;
+                    canWriteLog = actionsToWriteCallLog.ToLower()
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Contains(action.ToLower());
                 }
 
-                // 检查是否在写入列表，如果写入列表为空，那么不在拒绝列表里的ActionId都会写入
-                if (canWriteLog && !string.IsNullOrEmpty(actionIdsToWriteCallLog))
+                // 检查是否黑名单
+                if (canWriteLog && !string.IsNullOrEmpty(actionsDontWriteCallLog))
                 {
-                    if (actionId.IsIntegerPositive())
-                        canWriteLog = actionIdsToWriteCallLog.ContainsUintValue(uint.Parse(actionId));
-                    else
-                        canWriteLog = actionIdsToWriteCallLog.IndexOf("actionId") >= 0;
+                    canWriteLog = !actionsDontWriteCallLog.ToLower()
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Contains(action.ToLower());
                 }
             }
             catch (Exception ex)
             {
-                ExceptionLog(ex, "CheckCanCallLog", "NLogUtility", actionId);
+                ExceptionLog(ex, "CheckCanCallLog", "NLogUtility", action);
             }
 
             return canWriteLog;
@@ -335,18 +348,20 @@ ExtInfo:
         /// <param name="callEnd">调用结束时间</param>
         /// <param name="loggerName">日志的配置名称</param>
         /// <param name="logLevel">日志级别</param>
-        /// <param name="appid">应用ID</param>
-        /// <param name="ipAddress">客户端IP地址</param>
         /// <param name="dictVariable">其他字段</param>
         /// <param name="message">日志内容</param>
         /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
-        private static void CallLog(DateTime callBegin, DateTime callEnd,
-            string loggerName, LogLevel logLevel, int appid, string ipAddress,
-            Dictionary<string, string> dictVariable, string message, bool canOverride = true)
+        private static void CallLog(
+            DateTime callBegin, DateTime callEnd,
+            string loggerName, LogLevel logLevel,
+            Dictionary<string, string> dictVariable,
+            string message, bool canOverride = true)
         {
             if (dictVariable == null)
                 dictVariable = new Dictionary<string, string>();
-
+            if (dictVariable.ContainsKey("Action")
+                && !CheckCanCallLog(dictVariable["Action"]))
+                return;
 
             if (!dictVariable.ContainsKey("CallBegin"))
                 dictVariable.Add("CallBegin", callBegin.ToFullDateTimeString());
@@ -389,6 +404,7 @@ ExtInfo:
             else if (!canOverride)
                 dictVariable["CallEndHour"] = callEnd.ToString("HH");
 
+
             double milliseconds = (callEnd - callBegin).TotalMilliseconds;
             if (!dictVariable.ContainsKey("Milliseconds"))
                 dictVariable.Add("Milliseconds", milliseconds.ToString("0.000"));
@@ -396,19 +412,7 @@ ExtInfo:
                 dictVariable["Milliseconds"] = milliseconds.ToString("0.000");
 
 
-            if (!dictVariable.ContainsKey("AppId"))
-                dictVariable.Add("AppId", appid.ToString());
-            else if (!canOverride)
-                dictVariable["AppId"] = appid.ToString();
-
-            if (!dictVariable.ContainsKey("IPAddress"))
-                dictVariable.Add("IPAddress", ipAddress);
-            else if (!canOverride)
-                dictVariable["IPAddress"] = ipAddress;
-
-            //message = message.Replace(Environment.NewLine, " ").Replace("\r", " ").Replace("\n", " ");
             Log(loggerName, logLevel, message, dictVariable);
-
             // 当接口调用时间超过 CallLazyTime 指定的毫秒时，需要特殊记录
             if (milliseconds >= lazyTime)
                 Log("Lazy" + loggerName, logLevel, message, dictVariable);
@@ -421,15 +425,16 @@ ExtInfo:
         /// </summary>
         /// <param name="callBegin">调用开始时间</param>
         /// <param name="callEnd">调用结束时间</param>
-        /// <param name="appid">应用ID</param>
-        /// <param name="ipAddress">客户端IP地址</param>
         /// <param name="dictVariable">其他字段</param>
         /// <param name="message">日志内容</param>
         /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
-        public static void CallInfoLog(DateTime callBegin, DateTime callEnd, int appid, string ipAddress,
-            Dictionary<string, string> dictVariable, string message, bool canOverride = true)
+        public static void CallInfoLog(
+            DateTime callBegin, DateTime callEnd,
+            Dictionary<string, string> dictVariable,
+            string message, bool canOverride = true)
         {
-            CallLog(callBegin, callEnd, "CallInfoLog", LogLevel.Info, appid, ipAddress, dictVariable, message, canOverride);
+            CallLog(callBegin, callEnd, "CallInfoLog", LogLevel.Info,
+                dictVariable, message, canOverride);
         }
         #endregion
 
@@ -439,162 +444,19 @@ ExtInfo:
         /// </summary>
         /// <param name="callBegin">调用开始时间</param>
         /// <param name="callEnd">调用结束时间</param>
-        /// <param name="appid">应用ID</param>
-        /// <param name="ipAddress">客户端IP地址</param>
         /// <param name="dictVariable">其他字段</param>
         /// <param name="ex">异常</param>
         /// <param name="extInfo">附加的记录信息</param>
         /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
-        public static void CallErrorLog(DateTime callBegin, DateTime callEnd, int appid, string ipAddress,
-            Dictionary<string, string> dictVariable, Exception ex, string extInfo, bool canOverride = true)
+        public static void CallErrorLog(
+            DateTime callBegin, DateTime callEnd,
+            Dictionary<string, string> dictVariable,
+            Exception ex, string extInfo = "", bool canOverride = true)
         {
-            string message = $@"Message:{ex.Message}
-StackTrace:
-{ex.StackTrace}
-ExtInfo:
-{extInfo}
-{GetInnerExceptionInfo(ex)}";
-            CallLog(callBegin, callEnd, "CallErrorLog", LogLevel.Error, appid, ipAddress, dictVariable, message, canOverride);
+            CallLog(callBegin, callEnd, "CallErrorLog", LogLevel.Error,
+                dictVariable, GetExceptionMessage(ex, extInfo), canOverride);
         }
-        #endregion
 
-        #region CallErrorLog 记录调用异常日志
-        /// <summary>
-        /// 记录调用异常日志
-        /// </summary>
-        /// <param name="callBegin">调用开始时间</param>
-        /// <param name="callEnd">调用结束时间</param>
-        /// <param name="appid">应用ID</param>
-        /// <param name="ipAddress">客户端IP地址</param>
-        /// <param name="dictVariable">其他字段</param>
-        /// <param name="ex">异常</param>
-        /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
-        public static void CallErrorLog(DateTime callBegin, DateTime callEnd, int appid, string ipAddress,
-            Dictionary<string, string> dictVariable, Exception ex, bool canOverride = true)
-        {
-            CallErrorLog(callBegin, callEnd, appid, ipAddress, dictVariable, ex, "", canOverride);
-        }
-        #endregion
-
-
-        #region private CallLog 记录调用日志
-        /// <summary>
-        /// 记录调用日志
-        /// </summary>
-        /// <param name="appid">应用ID</param>
-        /// <param name="callBegin">调用开始时间</param>
-        /// <param name="callEnd">调用结束时间</param>
-        /// <param name="action">调用操作</param>
-        /// <param name="callSource">调用源</param>
-        /// <param name="ipAddress">客户端IP地址</param>
-        /// <param name="sessionId">SessionId</param>
-        /// <param name="sessionState">Session状态</param>
-        /// <param name="userId">用户Id</param>
-        /// <param name="userName">用户名称</param>
-        /// <param name="resultCode">接口返回值代码</param>
-        /// <param name="loggerName">日志的配置名称</param>
-        /// <param name="logLevel">日志级别</param>
-        /// <param name="message">日志信息</param>
-        [Obsolete("请使用新的CallLog重载方法代替")]
-        private static void CallLog(int appid, DateTime callBegin, DateTime callEnd, string action, string callSource,
-            string ipAddress, string sessionId, int sessionState, long userId, string userName, int resultCode,
-            string loggerName, LogLevel logLevel, string message)
-        {
-            double milliseconds = (callEnd - callBegin).TotalMilliseconds;
-
-            // 可记录的action，失败的调用，超时的调用，都记录日志
-            if (CheckCanCallLog(action) || resultCode != 0 || milliseconds >= lazyTime)
-            {
-                Dictionary<string, string> dictVariable = new Dictionary<string, string>();
-                dictVariable.Add("Action", action);
-                dictVariable.Add("CallSource", callSource);
-                dictVariable.Add("SessionId", sessionId);
-                dictVariable.Add("SessionState", sessionState.ToString());
-                dictVariable.Add("UserId", userId.ToString());
-                dictVariable.Add("UserName", userName);
-                dictVariable.Add("ResultCode", resultCode.ToString());
-                CallLog(callBegin, callEnd, loggerName, logLevel, appid, ipAddress, dictVariable, message);
-            }
-        }
-        #endregion
-
-        #region CallInfoLog 记录调用信息日志
-        /// <summary>
-        /// 记录调用信息日志
-        /// </summary>
-        /// <param name="appid">应用ID</param>
-        /// <param name="callBegin">调用开始时间</param>
-        /// <param name="callEnd">调用结束时间</param>
-        /// <param name="action">调用操作</param>
-        /// <param name="callSource">调用源</param>
-        /// <param name="ipAddress">客户端IP地址</param>
-        /// <param name="sessionId">SessionId</param>
-        /// <param name="sessionState">Session状态</param>
-        /// <param name="userId">用户Id</param>
-        /// <param name="userName">用户名称</param>
-        /// <param name="resultCode">接口返回值代码</param>
-        /// <param name="message">日志信息</param>
-        [Obsolete("请使用新的CallInfoLog重载方法代替")]
-        public static void CallInfoLog(int appid, DateTime callBegin, DateTime callEnd, string action, string callSource,
-            string ipAddress, string sessionId, int sessionState, long userId, string userName, int resultCode, string message)
-        {
-            CallLog(appid, callBegin, callEnd, action, callSource, ipAddress, sessionId, sessionState, userId, userName, resultCode, "CallInfoLog", LogLevel.Info, message);
-        }
-        #endregion
-
-        #region CallErrorLog 记录调用异常日志
-        /// <summary>
-        /// 记录调用异常日志
-        /// </summary>
-        /// <param name="appid">应用ID</param>
-        /// <param name="callBegin">调用开始时间</param>
-        /// <param name="callEnd">调用结束时间</param>
-        /// <param name="action">调用操作</param>
-        /// <param name="callSource">调用源</param>
-        /// <param name="ipAddress">客户端IP地址</param>
-        /// <param name="sessionId">SessionId</param>
-        /// <param name="sessionState">Session状态</param>
-        /// <param name="userId">用户Id</param>
-        /// <param name="userName">用户名称</param>
-        /// <param name="resultCode">接口返回值代码</param>
-        /// <param name="ex">异常</param>
-        /// <param name="extInfo">附加的记录信息</param>
-        [Obsolete("请使用新的CallErrorLog重载方法代替")]
-        public static void CallErrorLog(int appid, DateTime callBegin, DateTime callEnd, string action, string callSource,
-            string ipAddress, string sessionId, int sessionState, long userId, string userName, int resultCode, Exception ex, string extInfo)
-        {
-            string message = $@"Message:{ex.Message}
-StackTrace:
-{ex.StackTrace}
-ExtInfo:
-{extInfo}
-{GetInnerExceptionInfo(ex)}";
-            CallLog(appid, callBegin, callEnd, action, callSource, ipAddress, sessionId, sessionState, userId, userName, resultCode, "CallErrorLog", LogLevel.Error, message);
-        }
-        #endregion
-
-        #region CallErrorLog 记录调用异常日志
-        /// <summary>
-        /// 记录调用异常日志
-        /// </summary>
-        /// <param name="appid">应用ID</param>
-        /// <param name="callBegin">调用开始时间</param>
-        /// <param name="callEnd">调用结束时间</param>
-        /// <param name="action">调用操作</param>
-        /// <param name="callSource">调用源</param>
-        /// <param name="ipAddress">客户端IP地址</param>
-        /// <param name="sessionId">SessionId</param>
-        /// <param name="sessionState">Session状态</param>
-        /// <param name="userId">用户Id</param>
-        /// <param name="userName">用户名称</param>
-        /// <param name="resultCode">接口返回值代码</param>
-        /// <param name="ex">异常</param>
-        [Obsolete("请使用新的CallErrorLog重载方法代替")]
-        public static void CallErrorLog(int appid, DateTime callBegin, DateTime callEnd, string action, string callSource,
-            string ipAddress, string sessionId, int sessionState, long userId, string userName, int resultCode, Exception ex)
-        {
-            CallErrorLog(appid, callBegin, callEnd, action, callSource, ipAddress, sessionId, sessionState, userId, userName, resultCode, ex, "");
-        }
         #endregion
 
     }
