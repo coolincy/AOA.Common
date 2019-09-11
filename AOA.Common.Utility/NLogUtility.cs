@@ -64,7 +64,7 @@ namespace AOA.Common.Utility
         }
         #endregion
 
-        #region Log(string loggerName, LogLevel logLevel, string message, Dictionary<string, string> dictVariable) 写日志
+        #region Log(string loggerName, LogLevel logLevel, string message, Dictionary<string, object> dictVariable) 写日志
         /// <summary>
         /// 写日志
         /// </summary>
@@ -72,7 +72,7 @@ namespace AOA.Common.Utility
         /// <param name="logLevel">日志级别</param>
         /// <param name="message">日志信息</param>
         /// <param name="dictVariable">日志上下文自定义变量字典，可以以${event-context:键名称}的形式用于NLog.Config文件中</param>
-        public static void Log(string loggerName, LogLevel logLevel, string message, Dictionary<string, string> dictVariable)
+        public static void Log(string loggerName, LogLevel logLevel, string message, Dictionary<string, object> dictVariable)
         {
             try
             {
@@ -81,8 +81,8 @@ namespace AOA.Common.Utility
                 {
                     LogEventInfo logEvent = new LogEventInfo(logLevel, logger.Name, message);
                     if (dictVariable != null)
-                        foreach (KeyValuePair<string, string> item in dictVariable)
-                            logEvent.Properties.Add(item.Key, item.Value); // logEvent.Context.Add(item.Key, item.Value);
+                        foreach (KeyValuePair<string, object> item in dictVariable)
+                            logEvent.Properties.Add(item.Key, item.Value);
                     logger.Log(logEvent);
                 }
                 else
@@ -110,7 +110,7 @@ namespace AOA.Common.Utility
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
-            Log("InfoLog", LogLevel.Info, message, new Dictionary<string, string>
+            Log("InfoLog", LogLevel.Info, message, new Dictionary<string, object>
             {
                 { "EventPrefix", eventPrefix },
                 { "SubDir", subDir }
@@ -157,7 +157,7 @@ namespace AOA.Common.Utility
             if (string.IsNullOrEmpty(eventPrefix))
                 eventPrefix = "Log";
 
-            Log("DebugLog", LogLevel.Debug, message, new Dictionary<string, string>
+            Log("DebugLog", LogLevel.Debug, message, new Dictionary<string, object>
             {
                 { "EventPrefix", eventPrefix },
                 { "SubDir", subDir }
@@ -239,7 +239,7 @@ namespace AOA.Common.Utility
                 eventPrefix = "Log";
 
             Log("ExceptionLog", LogLevel.Error, GetExceptionMessage(ex, extInfo),
-                new Dictionary<string, string>
+                new Dictionary<string, object>
                 {
                     { "EventPrefix", eventPrefix },
                     { "SubDir", subDir }
@@ -354,13 +354,13 @@ namespace AOA.Common.Utility
         private static void CallLog(
             DateTime callBegin, DateTime callEnd,
             string loggerName, LogLevel logLevel,
-            Dictionary<string, string> dictVariable,
+            Dictionary<string, object> dictVariable,
             string message, bool canOverride = true)
         {
             if (dictVariable == null)
-                dictVariable = new Dictionary<string, string>();
+                dictVariable = new Dictionary<string, object>();
             if (dictVariable.ContainsKey("Action")
-                && !CheckCanCallLog(dictVariable["Action"]))
+                && !CheckCanCallLog(dictVariable["Action"].ToString()))
                 return;
 
             if (!dictVariable.ContainsKey("CallBegin"))
@@ -430,7 +430,7 @@ namespace AOA.Common.Utility
         /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
         public static void CallInfoLog(
             DateTime callBegin, DateTime callEnd,
-            Dictionary<string, string> dictVariable,
+            Dictionary<string, object> dictVariable,
             string message, bool canOverride = true)
         {
             CallLog(callBegin, callEnd, "CallInfoLog", LogLevel.Info,
@@ -450,7 +450,7 @@ namespace AOA.Common.Utility
         /// <param name="canOverride">默认日志变量可以被传入的值重写</param>
         public static void CallErrorLog(
             DateTime callBegin, DateTime callEnd,
-            Dictionary<string, string> dictVariable,
+            Dictionary<string, object> dictVariable,
             Exception ex, string extInfo = "", bool canOverride = true)
         {
             CallLog(callBegin, callEnd, "CallErrorLog", LogLevel.Error,

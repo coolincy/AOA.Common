@@ -428,16 +428,16 @@ namespace AOA.Common.Test
             }
 
             NLogUtility.ExceptionLog(ex, "prefix", "subDir", "extInfo");
-            Dictionary<string, string> dictVariable = new Dictionary<string, string>();
+            Dictionary<string, object> dictVariable = new Dictionary<string, object>();
             //NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, 100010, "127.0.0.1", dictVariable, "call message");
             dictVariable.Add("Action", "action");
             dictVariable.Add("ProductId", "product");
             dictVariable.Add("CallSource", "callSource");
             dictVariable.Add("SessionId", "sessionId");
-            dictVariable.Add("SessionState", "1");
-            dictVariable.Add("UserId", "100000");
+            dictVariable.Add("SessionState", 1);
+            dictVariable.Add("UserId", 100000);
             dictVariable.Add("UserName", "UserName");
-            dictVariable.Add("ResultCode", "0");
+            dictVariable.Add("ResultCode", 0);
             NLogUtility.CallInfoLog(DateTime.Now.AddMinutes(-1), DateTime.Now, dictVariable, "call message");
             //NLogUtility.CallErrorLog(100010, DateTime.Now.AddMinutes(-1), DateTime.Now, "action", "callSource", "127.0.0.1", "sessionId", 1, 100000, "UserName", 0, ex, "ext message");
             NLogUtility.CallErrorLog(DateTime.Now.AddMinutes(-1), DateTime.Now, dictVariable, ex, "ext message");
