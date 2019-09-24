@@ -619,7 +619,7 @@ namespace AOA.Common.Test
 
         private void BtnHwId_Click(object sender, EventArgs e)
         {
-            tbHwId.Text = CPUInfoHelper.GetCPUId();
+            tbHwId.Text = CPUInfoHelper.GetCPUId() + "  =  " + HardwareIdHelper.GetHardwareIdBase64();
         }
 
     }

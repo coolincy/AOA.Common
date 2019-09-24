@@ -3,7 +3,7 @@
     <Import Project="../common.props" />
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Product>AOA Common Utility Crypto</Product>
         <PackageTags>AOA Common Utility Crypto</PackageTags>
         <PackageReleaseNotes>AOA Common Utility Crypto</PackageReleaseNotes>

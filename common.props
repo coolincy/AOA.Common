@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <Version>2.1.8.3</Version>
+        <Version>3.0.0</Version>
         <Authors>AOA Studio</Authors>
         <Company>AOA Studio</Company>
         <Copyright>AOA Studio</Copyright>
@@ -10,6 +10,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageProjectUrl>http://www.aoastudio.com</PackageProjectUrl>
         <Description>AOA.Common.Utility 通用工具类
+3.0.0 upgrade to .net core 3.0(netstandard2.1)
 2.1.8.3 upgrade nuget packages
 2.1.8.2 调整 NLogUtility.CallLog 部分输出字段类型
 2.1.8.1 调整 NLogUtility 日志扩展字段类型从 string 改为 object

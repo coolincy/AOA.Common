@@ -3,7 +3,7 @@
     <Import Project="../common.props" />
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Product>AOA Common Utility Net</Product>
         <PackageTags>AOA Common Utility Net</PackageTags>
         <PackageReleaseNotes>AOA Common Utility Net</PackageReleaseNotes>
@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.Primitives" Version="4.6.0" />
     </ItemGroup>
 
     <ItemGroup>

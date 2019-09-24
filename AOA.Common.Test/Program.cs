@@ -1,6 +1,4 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Windows.Forms;
 
 namespace AOA.Common.Test
@@ -8,11 +6,12 @@ namespace AOA.Common.Test
     static class Program
     {
         /// <summary>
-        /// åº”ç”¨ç¨‹åºçš„ä¸»å…¥å£ç‚¹ã€‚
+        /// Ó¦ÓÃ³ÌĞòµÄÖ÷Èë¿Úµã¡£
         /// </summary>
         [STAThread]
         static void Main()
         {
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

@@ -3,7 +3,7 @@
     <Import Project="../common.props" />
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Product>AOA Common Utility CustomConfig</Product>
         <PackageTags>AOA Common Utility CustomConfig</PackageTags>
         <PackageReleaseNotes>AOA Common Utility CustomConfig</PackageReleaseNotes>
